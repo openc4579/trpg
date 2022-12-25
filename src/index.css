@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    font-size: 1rem;
+    font-family: cinzelDeco,Helvetica,Arial,'微軟正黑體','Microsoft JhengHei',sans-serif;
+}
