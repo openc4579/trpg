@@ -2,18 +2,14 @@ import axios from "./axios"
 
 export function getClasses(class_str){
     const bodyParam = {
-        'type': class_str
+        'type': 'classes',
+        'id': class_str
     };
 
-    return axios.get("get_classes_data.php", bodyParam)
+    return axios.get("get_classes_data.php", {params:bodyParam})
         .then(response => {
             if (response.status === 200){
-                if(!!response.data.content){
-                    return response.data.content;
-                }
-                else{
-                    return response.data.error;
-                }
+                return response.data;
             }
         })
         .catch(err => console.log(err));
