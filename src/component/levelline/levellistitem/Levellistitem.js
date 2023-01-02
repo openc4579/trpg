@@ -3,7 +3,6 @@ import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import LevellineIcon from './LevellineIcon'
 
 export default function Levellistitem(props){
-
     return(
         <>
             {
@@ -23,28 +22,42 @@ export default function Levellistitem(props){
                             <span className="font-bold ml-4 text-lg">{((typeof levelitemdetail.subclass_title !== "undefined" && levelitemdetail.subclass_title !== '') ? '('+levelitemdetail.subclass_title+')' : '')}</span>
                         </div>
                         <div>
-                            {levelitemdetail.description.split("\n\r").map((i,key) => {
-                                return <div key={key} className="text-lg">{i}</div>;
-                            })}
+                            {
+                                levelitemdetail.description && levelitemdetail.description.map((i,key) => {
+                                    return <div key={key} className={"text-lg" + ((key !== (levelitemdetail.description.length - 1)) ? " mb-6" : '')}>{i}</div>;
+                                })
+                            }
                         </div>
                         {
-                            (typeof levelitemdetail.sublist !== 'undefined' && levelitemdetail.sublist.length > 0) ?
+                            (typeof levelitemdetail.replace_cfid !== 'undefined' && levelitemdetail.replace_cfid.length === 0 && typeof levelitemdetail.sublist !== 'undefined' && levelitemdetail.sublist.length > 0) ?
 
                             (
-                                <ul className="levelline-item-sublist list-disc pl-6 mt-4">
-                                    {levelitemdetail.sublist.map((sublistitem, si)=>(
-                                        <li key={'level'+i+'-sub'+si} className="py-2">
-                                            <div>
-                                                <div className="vertical-timeline-element-sublist-title text-xl font-bold">{sublistitem.subtitle}</div>
-                                                <div>
-                                                    {sublistitem.subdesc.split("\n\r").map((i,key) => {
-                                                        return <div key={key} className="text-lg">{i}</div>;
-                                                    })}
-                                                </div>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
+                                <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+                                    <input type="checkbox" />
+                                    <div className="collapse-title text-xl font-medium border-b-2 border-base-300">
+                                        選項：
+                                    </div>
+                                    <div className="collapse-content">
+                                        <ul className="levelline-item-sublist list-disc pl-6 mt-4">
+                                            {
+                                                levelitemdetail.sublist.map((sublistitem, si)=>(
+                                                    <li key={'level'+i+'-sub'+si} className="py-2">
+                                                        <div>
+                                                            <div className="vertical-timeline-element-sublist-title text-xl font-bold">{sublistitem.subtitle}</div>
+                                                            <div>
+                                                                {
+                                                                    sublistitem.subdesc && sublistitem.subdesc.map((i,key) => {
+                                                                        return <div key={key} className="text-lg">{i}</div>;
+                                                                    })
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
                             ) : ''
                         }
                     </VerticalTimelineElement>

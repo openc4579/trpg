@@ -4,9 +4,8 @@ import Levellistitem from './levellistitem/Levellistitem';
 import './levelline.scss';
 
 export default function Levellist(props){
-    console.log(props)
     return(
-        <div id="verticalLevelLine" className="p-4 mt-8 md:mx-8">
+        <div id="verticalLevelLine" className="md:p-4 my-8 md:mx-8">
             <div className="levellist-container">
                 <VerticalTimeline className="vertical-timeline-custom-line" layout="1-column-left">
                     <VerticalTimelineElement
