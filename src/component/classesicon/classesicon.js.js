@@ -1,5 +1,3 @@
-import React from 'react'
-
 import artificer from '../../asset/images/classes/icons/Artificer.svg'
 import barbarian from '../../asset/images/classes/icons/Barbarian.svg'
 import bard from '../../asset/images/classes/icons/Bard.svg'

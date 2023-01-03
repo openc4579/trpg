@@ -8,7 +8,10 @@ export default function AppRouter(props){
     return(
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/classes" element={<Classes />} />
+            <Route path="/class">
+                <Route index element={<Classes />} />
+                <Route path=":class" element={<Classes />} />
+            </Route>
         </Routes>
     )
 }

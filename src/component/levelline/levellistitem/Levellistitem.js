@@ -10,14 +10,16 @@ export default function Levellistitem(props){
                     <VerticalTimelineElement
                         className={((typeof levelitemdetail.subclass === "undefined") ? "vertical-timeline-element--class" : "vertical-timeline-element--subclass") + ((i == 0) ? " pt-[4em] md:pt-0" : "")}
                         contentStyle={{ background: '#e6ecf1'}}
-                        contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                        contentArrowStyle={{ display: 'none' }}
                         iconStyle={{ background: '#e6ecf1', color: 'rgb(33, 150, 243)' }}
                         icon={<LevellineIcon leveltext={props.leveltext}/>}
                         iconClassName={(i != 0) ? 'icon-cacnel' : ''}
                         position='right'
                         textClassName="ml-0 md:ml-16"
                         id={"feature_"+levelitemdetail.fid}
+                        key={levelitemdetail.fid}
                     >
+                        <div className="vertical-timeline-element-content-arrow hidden md:block"></div>
                         <div className="vertical-timeline-element-title text-2xl font-bold">{levelitemdetail.title}</div>
                         <div className="vertical-timeline-element-subtitle">
                             {"等級 "+props.leveltext}
@@ -34,7 +36,7 @@ export default function Levellistitem(props){
                             (typeof levelitemdetail.replace_cfid !== 'undefined' && levelitemdetail.replace_cfid.length === 0 && typeof levelitemdetail.sublist !== 'undefined' && levelitemdetail.sublist.length > 0) ?
 
                             (
-                                <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+                                <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-6">
                                     <input type="checkbox" />
                                     <div className="collapse-title text-xl font-medium border-b-2 border-base-300">
                                         選項：

@@ -25,17 +25,10 @@ export function ClassBasicLevelsTable(props){
                         </thead>
                         <tbody>
                             {
-                                levels_key && levels_key.map((level)=>{
-                                    const level_feature = []
+                                levels_key && levels_key.map((level, i)=>{
                                     const levelitems = props.levels[level]['levelitems']
-                                    /*
-                                    if(typeof props.levels[level]['levelitems'] !== 'undefined') {
-                                        console.log(props.levels[level]['levelitems'])
-                                        //levelitems = {...props.levels[level]['levelitems']};
-                                    }
-                                    */
                                     return(
-                                        <tr>
+                                        <tr key={i}>
                                             <th>{level}</th>
                                             <td>
                                                 {
@@ -46,7 +39,7 @@ export function ClassBasicLevelsTable(props){
                                                 {
                                                     levelitems && levelitems.map((levelitem)=>{
                                                         return(
-                                                            <span className="link link-hover mx-4" onClick={handleClickScroll} data-target={'feature_'+levelitem.fid}>
+                                                            <span className="link link-hover mx-4" onClick={handleClickScroll} data-target={'feature_'+levelitem.fid} key={levelitem.fid}>
                                                                 {levelitem['title']}
                                                             </span>
                                                         )

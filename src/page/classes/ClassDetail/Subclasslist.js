@@ -10,10 +10,10 @@ export default function Subclasslist(props){
     return(
         <div className="text-center my-8">
             {
-                props.subclasses && props.subclasses.map(function(subclass_group){
+                props.subclasses && props.subclasses.map(function(subclass_group, i){
                     const active = props.activeSubclass.includes(subclass_group.subclass)
                     return(
-                        <Activebutton updateActiveSubclass={updateActiveSubclass} value={subclass_group.subclass} text={subclass_group.subclass_title} active={active}/>
+                        <Activebutton updateActiveSubclass={updateActiveSubclass} value={subclass_group.subclass} text={subclass_group.subclass_title} active={active} key={i}/>
                     )
                 })
             }

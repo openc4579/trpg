@@ -2,10 +2,10 @@ export default function Classbasic(props){
 
     return(
         <div className="card border bg-base-100 shadow-xl">
-            <div class="p-4 md:p-8 md:grid gap-8 grid-cols-3">
+            <div className="p-4 md:p-8 md:grid gap-8 grid-cols-3">
                 {
                     Object.keys(props.basic).map((basic_key) => (
-                        <div className="classbasic-hitpoint m-4">
+                        <div className="classbasic-hitpoint m-4" key={basic_key}>
                             <div className="classbasic-hitpoint-title text-2xl font-bold">{props.basic[basic_key].title}</div>
                             {
                                 (() => {
@@ -35,8 +35,8 @@ export default function Classbasic(props){
                                                     <div className="text-lg">{'你起始攜帶下列物品，以及任何你背景所提供的東西。'}</div>
                                                     <ul className="levelline-item-sublist list-disc pl-6">
                                                         {
-                                                            item.choice.map((choice_group)=>(
-                                                                <li className="py-2">
+                                                            item.choice.map((choice_group, i)=>(
+                                                                <li className="py-2" key={i}>
                                                                     <div className="text-lg">{'(a)'+choice_group.a+' 或 (b)'+choice_group.b}</div>
                                                                 </li>
                                                             ))

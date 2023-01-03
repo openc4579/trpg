@@ -137,7 +137,6 @@ export default function ClassDetail(props){
         setCurrentClass(props.current_class)
     }, [])
 
-
     return(
         <>
             <div className="p-8">
@@ -155,7 +154,7 @@ export default function ClassDetail(props){
                         <div className="content">
                             {
                                 desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8">{i}</p>;
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
                                 })
                             }
                         </div>
@@ -168,7 +167,7 @@ export default function ClassDetail(props){
                         <div className="collapse-content">
                             {
                                 desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8">{i}</p>;
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
                                 })
                             }
                         </div>

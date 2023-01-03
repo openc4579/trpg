@@ -13,11 +13,11 @@ export default function App(props){
             link: 'https://github.com/Lakston',
             icon: 'fa-pencil-square-o',
             submenu: [{
-                text: '職業',
-                link: '/Classes',
+                text: '種族',
+                link: '/race',
             }, {
-                text: 'Author-2',
-                link: 'https://github.com/Lakston',
+                text: '職業',
+                link: '/class',
             }, {
                 text: 'Author-3',
                 link: 'https://github.com/Lakston',
