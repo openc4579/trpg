@@ -1,45 +1,64 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import icon from '../classesicon/classesicon.js'
+import {Link} from 'react-router-dom'
 
 import './searchbox.scss'
 
-class SearchBox extends Component{
-    constructor(props){
-        super(props)
-        this.state = {isOpenSearchBox: false}
+export default function SearchBox(props) {
+    const [isOpenSearchBox, setIsOpenSearchBox] = useState(false)
 
-        this._checkSearchBoxOpen = this._checkSearchBoxOpen.bind(this)
-    }
-
-    _checkSearchBoxOpen(e){
+    function _checkSearchBoxOpen(e){
         let isChecked = e.target.checked;
-        this.setState({
-            isOpenSearchBox: isChecked
-        });
+        setIsOpenSearchBox(isChecked);
     }
 
-    render(){
-        return(
-            <div className="searchbox collapse">
-                <input type="checkbox" onChange={this._checkSearchBoxOpen} checked={this.state.isOpenSearchBox}/>
+    console.log(props)
+
+    return(
+        <div className="searchbox">
+            <div className="collapse shadow-xl">
+                <input type="checkbox" onChange={_checkSearchBoxOpen} checked={isOpenSearchBox}/>
                 <div className="title collapse-title text-xl font-medium">
-                    Click me to show/hide content
+                    {props.search_title}
                 </div>
                 <div className="collapse-content">
-                    <p>hello</p>
-                </div>
-                <div className='searchbox-arrow'>
-                    <div className="searchbox-arrow-line left">
-                    </div>
-                    <label className="searchbox-arrow-icon swap bg-white -t-[10px]">
-                        <input type="checkbox" onChange={this._checkSearchBoxOpen} checked={this.state.isOpenSearchBox}/>
-                        <div className="swap-on translate-y-[7px]"><i className="arrow rotate-[225deg]"></i></div>
-                        <div className="swap-off translate-y-[-7px]"><i className="arrow rotate-45"></i></div>
-                    </label>
-                    <div className="searchbox-arrow-line right">
-                    </div>
+                    {
+                        props.display_lists && props.display_lists.map((list) => {
+                            return(
+                                <>
+                                <div className="grid grid-cols-2 md:grid-cols-6 h-24">
+                                    <div className="p-4 align-baseline">
+                                        <Link to={props.path_root+"/"+list.key} className="text-xl">
+                                            {
+                                                (props.has_icon) ? (<img className="h-10 inline-block mr-4" src={icon[list.key]} alt={list.name}/>) : ''
+                                            }
+                                            <span>{list.name}</span>
+                                        </Link>
+                                    </div>
+                                    <div className="p-4">
+                                        {
+                                            (props.has_icon) ? (<img className="h-10" src={icon[list.key]} alt={list.name}/>) : ''
+                                        }
+                                        <Link to={props.path_root+"/"+list.key} className="text-xl">{list.name}</Link>
+                                    </div>
+                                </div>
+                                </>
+                            )
+                        })
+                    }
                 </div>
             </div>
-        )
-    }
+            <div className='searchbox-arrow w-full'>
+                <div className="searchbox-arrow-line left">
+                </div>
+                <label className="searchbox-arrow-icon swap border-2 border-base-100 bg-primary-focus shadow-xl">
+                    <input type="checkbox" onChange={_checkSearchBoxOpen} checked={isOpenSearchBox}/>
+                    <div className="swap-on translate-y-[2px]"><i className="arrow rotate-[225deg]"></i></div>
+                    <div className="swap-off translate-y-[-4px]"><i className="arrow rotate-45"></i></div>
+                </label>
+                <div className="searchbox-arrow-line right">
+                </div>
+            </div>
+        </div>
+    )
 }
-export default SearchBox

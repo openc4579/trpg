@@ -3,6 +3,10 @@ import React from 'react'
 export function ClassBasicLevelsTable(props){
     const levels_key = Object.keys(props.levels)
 
+    function handleClickScroll(e){
+        props.onClick(e.target.dataset.target)
+    }
+
     return(
         <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-6 shadow-md">
             <input type="checkbox" />
@@ -23,14 +27,13 @@ export function ClassBasicLevelsTable(props){
                             {
                                 levels_key && levels_key.map((level)=>{
                                     const level_feature = []
+                                    const levelitems = props.levels[level]['levelitems']
+                                    /*
                                     if(typeof props.levels[level]['levelitems'] !== 'undefined') {
-                                        const levelitems = props.levels[level]['levelitems']
-                                        if(levelitems.length > 0) {
-                                            levelitems.map((levelitem)=>{
-                                                level_feature.push(levelitem['title'])
-                                            })
-                                        }
+                                        console.log(props.levels[level]['levelitems'])
+                                        //levelitems = {...props.levels[level]['levelitems']};
                                     }
+                                    */
                                     return(
                                         <tr>
                                             <th>{level}</th>
@@ -39,7 +42,17 @@ export function ClassBasicLevelsTable(props){
                                                     (typeof props.profBonus[(level-1)] !== 'undefined') ? '+'+props.profBonus[(level-1)] : '-'
                                                 }
                                             </td>
-                                            <td>{level_feature.toString()}</td>
+                                            <td>
+                                                {
+                                                    levelitems && levelitems.map((levelitem)=>{
+                                                        return(
+                                                            <span className="link link-hover mx-4" onClick={handleClickScroll} data-target={'feature_'+levelitem.fid}>
+                                                                {levelitem['title']}
+                                                            </span>
+                                                        )
+                                                    })
+                                                }
+                                            </td>
                                         </tr>
                                     )
                                 })

@@ -8,13 +8,15 @@ export default function Levellistitem(props){
             {
                 props.level_group.levelitems.map((levelitemdetail, i)=>(
                     <VerticalTimelineElement
-                        className={(typeof levelitemdetail.subclass === "undefined") ? "vertical-timeline-element--class" : "vertical-timeline-element--subclass"}
+                        className={((typeof levelitemdetail.subclass === "undefined") ? "vertical-timeline-element--class" : "vertical-timeline-element--subclass") + ((i == 0) ? " pt-[4em] md:pt-0" : "")}
                         contentStyle={{ background: '#e6ecf1'}}
                         contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
                         iconStyle={{ background: '#e6ecf1', color: 'rgb(33, 150, 243)' }}
                         icon={<LevellineIcon leveltext={props.leveltext}/>}
                         iconClassName={(i != 0) ? 'icon-cacnel' : ''}
                         position='right'
+                        textClassName="ml-0 md:ml-16"
+                        id={"feature_"+levelitemdetail.fid}
                     >
                         <div className="vertical-timeline-element-title text-2xl font-bold">{levelitemdetail.title}</div>
                         <div className="vertical-timeline-element-subtitle">

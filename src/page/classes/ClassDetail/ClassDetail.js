@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import icon from '../../../asset/images/classes/icons/Fighter.svg'
+import { useState, useEffect } from 'react'
+import icon from '../../../component/classesicon/classesicon.js'
 import Levellist from '../../../component/levelline/Levellist'
 import Classbasic from './Classbaisc'
 import Subclasslist from './Subclasslist'
@@ -118,6 +118,13 @@ export default function ClassDetail(props){
         setActiveSubclass(newActiveSubclass)
     }
 
+    function handleClickScroll(elementId){
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     useEffect(() => {
         getFeatureList()
     }, [levels, activeSubclass])
@@ -139,7 +146,7 @@ export default function ClassDetail(props){
             <div className="mx-auto bg-white border rounded-xl shadow-md overflow-hidden">
                 <div className="md:flex">
                     <div className="md:shrink-0 p-4">
-                        <img className="w-full object-cover" src={icon} alt="Modern building architecture"/>
+                        <img className="w-full object-cover" src={icon[currentClass]} alt="Modern building architecture"/>
                     </div>
                     <div className="p-4 hidden md:block">
                         <div className="title text-xl font-medium">
@@ -174,7 +181,7 @@ export default function ClassDetail(props){
                 </div>
                 <Classbasic basic={basic}/>
                 {/* -- 職業特性列表 -- */}
-                <ClassBasicLevelsTable levels={levels} className={className} profBonus={profBonus}/>
+                <ClassBasicLevelsTable levels={levels} className={className} profBonus={profBonus} onClick={handleClickScroll}/>
                 {/* -- 職業特性列表 -- */}
                 {/*
                     (subclassesLevel.length > 0) ? (<Subclasslist subclasses={subclassesLevel} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>) : ''
