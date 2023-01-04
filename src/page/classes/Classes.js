@@ -18,7 +18,19 @@ export default function Classes(){
     }
 
     useEffect(() => {
-        if(typeof param_class.class !== 'undefined') setCurrentClass(param_class.class)
+        const request_current_class = (typeof param_class.class !== 'undefined') ? param_class.class : ''
+
+        if(classesList.length > 0 && request_current_class != ''){
+            const request_match = classesList.findIndex((class_item)=>{
+                return class_item.key == request_current_class
+            })
+            if(request_match > -1) {
+                setCurrentClass(param_class.class)
+            }
+            else{
+                setCurrentClass('')
+            }
+        }
     }, [classesList, param_class])
 
     useEffect(() => {
@@ -32,9 +44,9 @@ export default function Classes(){
             </div>
             <SerachBox search_title="職業列表" display_lists={classesList} has_icon={true} path_root="/class" extend={(currentClass != '') ? false : true}/>
             {
-                (currentClass != '') ? 
+                (currentClass != '') ?
                 (
-                    <ClassDetail current_class={currentClass}/>
+                    <ClassDetail current_class={currentClass} class_list={classesList}/>
                 ) : null
             }
         </>

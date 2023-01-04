@@ -1,7 +1,7 @@
 import React from 'react'
 
 export function ClassBasicLevelsTable(props){
-    const levels_key = Object.keys(props.levels)
+    const features_key = Object.keys(props.features)
 
     function handleClickScroll(e){
         props.onClick(e.target.dataset.target)
@@ -25,22 +25,22 @@ export function ClassBasicLevelsTable(props){
                         </thead>
                         <tbody>
                             {
-                                levels_key && levels_key.map((level, i)=>{
-                                    const levelitems = props.levels[level]['levelitems']
+                                features_key && features_key.map((feature, i)=>{
+                                    const featureitems = props.features[feature]['featureitems']
                                     return(
                                         <tr key={i}>
-                                            <th>{level}</th>
+                                            <th>{feature}</th>
                                             <td>
                                                 {
-                                                    (typeof props.profBonus[(level-1)] !== 'undefined') ? '+'+props.profBonus[(level-1)] : '-'
+                                                    (typeof props.profBonus[(feature-1)] !== 'undefined') ? '+'+props.profBonus[(feature-1)] : '-'
                                                 }
                                             </td>
                                             <td>
                                                 {
-                                                    levelitems && levelitems.map((levelitem)=>{
+                                                    featureitems && featureitems.map((featureitem)=>{
                                                         return(
-                                                            <span className="link link-hover mx-4" onClick={handleClickScroll} data-target={'feature_'+levelitem.fid} key={levelitem.fid}>
-                                                                {levelitem['title']}
+                                                            <span className="link link-hover mx-4" onClick={handleClickScroll} data-target={'feature_'+featureitem.fid} key={featureitem.fid}>
+                                                                {featureitem['title']}
                                                             </span>
                                                         )
                                                     })

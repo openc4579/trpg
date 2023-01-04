@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Activebutton(props){
-    const [active, setActive] = useState(props.active);
+    const [active, setActive] = useState(false);
 
     function updateActiveSubclass(e){
         props.updateActiveSubclass(e.target.value)
         setActive(!active)
     }
+
+    useEffect(()=>{
+        setActive(props.active)
+    }, [props])
 
     return(
         <>

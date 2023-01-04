@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import icon from '../classesicon/classesicon.js'
+import icons from '../icons/icons.js'
 import {Link} from 'react-router-dom'
 
 import './searchbox.scss'
@@ -26,19 +26,19 @@ export default function SearchBox(props) {
                     {props.search_title}
                 </div>
                 <div className={(isExtend) ? "" : "collapse-content"}>
-                    <div className="my-4">
+                    <div className="my-4 grid gap-4 grid-cols-2 md:grid-cols-6">
                         {
                             props.display_lists && props.display_lists.map((list) => {
                                 return(
-                                    <div key={list.key} className="grid gap-4 grid-cols-2 md:grid-cols-6">
-                                        <div className="alert shadow-lg">
-                                            <Link to={props.path_root+"/"+list.key} className="text-2xl w-full">
-                                                {
-                                                    (props.has_icon) ? (<img fill="none" className="stroke-current flex-shrink-0 w-6 h-6" src={icon[list.key]} alt={list.name}/>) : ''
-                                                }
-                                                <span className="mx-auto">{list.name}</span>
-                                            </Link>
-                                        </div>
+                                    <div key={list.key} className="grid">
+                                        <Link to={props.path_root+"/"+list.key} className="text-2xl w-full">
+                                            <div className="alert shadow-lg">
+                                                    {
+                                                        (props.has_icon) ? (<img fill="none" className="stroke-current flex-shrink-0 w-6 h-6" src={icons[list.key+'Icon']} alt={list.name}/>) : ''
+                                                    }
+                                                    <span className="mx-auto">{list.name}</span>
+                                            </div>
+                                        </Link>
                                     </div>
                                 )
                             })

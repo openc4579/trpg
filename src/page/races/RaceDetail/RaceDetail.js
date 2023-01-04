@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react'
 import icons from '../../../component/icons/icons.js'
-import Levellist from '../../../component/levelline/Levellist'
-import Classbasic from './Classbaisc'
-import Subclasslist from './Subclasslist'
-import { ClassBasicLevelsTable } from './ClassBasicLevelsTable'
+//import Levellist from '../../../component/levelline/Levellist'
+//import Classbasic from './Classbaisc'
+//import Subclasslist from './Subclasslist'
+//import { ClassBasicLevelsTable } from './ClassBasicLevelsTable'
 
 import {getClasses} from '../../../helper/controller';
 
 
-export default function ClassDetail(props){
+export default function RaceDetail(props){
+    const [currentRace, setCurrentRace] = useState('');
+
     const [currentClass, setCurrentClass] = useState('');
     const [className, setClassName] = useState('');
-    const [features, setFeatures] = useState([]);
+    const [levels, setLevels] = useState([]);
 
     const [desc, setDesc] = useState([]);
     const [basic, setBasic] = useState([]);
@@ -22,19 +24,19 @@ export default function ClassDetail(props){
     const [activeSubclass, setActiveSubclass] = useState([]);
 
     function getFeatureList(){
-        const temp_features = []
-        const features_keys = Object.keys(features)
+        const temp_levels = []
+        const levels_keys = Object.keys(levels)
         const subclass_keys = Object.keys(subclassesLevel)
 
-        if(features_keys.length > 0) {
-            features_keys.map((feature)=>{
-                const featureitems = features[feature]['featureitems'] ? features[feature]['featureitems'] : [];
-                if(featureitems.length > 0){
-                    temp_features[feature] = []
-                    temp_features[feature]['featureitems'] = [];
+        if(levels_keys.length > 0) {
+            levels_keys.map((level)=>{
+                const levelitems = levels[level]['levelitems'] ? levels[level]['levelitems'] : [];
+                if(levelitems.length > 0){
+                    temp_levels[level] = []
+                    temp_levels[level]['levelitems'] = [];
 
-                    featureitems.map((featureitem)=>{
-                        temp_features[feature]['featureitems'].push(featureitem);
+                    levelitems.map((levelitem)=>{
+                        temp_levels[level]['levelitems'].push(levelitem);
                     })
                 }
             })
@@ -46,21 +48,21 @@ export default function ClassDetail(props){
                 const subclass_title = subclassesLevel[subclass_name].title
 
                 if(!!activeSubclass.includes(subclass_name)){
-                    const subclass_features = subclassesLevel[subclass_name].features
-                    const subclass_features_keys = Object.keys(subclass_features)
+                    const subclass_levels = subclassesLevel[subclass_name].levels
+                    const subclass_levels_keys = Object.keys(subclass_levels)
 
-                    subclass_features_keys && subclass_features_keys.map(function(subclass_level){
-                        const temp_feature = subclass_features[subclass_level]
-                        temp_feature.featureitems.map(function(featureitem){
-                            featureitem.subclass = subclass_name
-                            featureitem.subclass_title = subclass_title
-                            if(typeof temp_features[subclass_level] !== 'undefined' && typeof temp_features[subclass_level].featureitems !== 'undefined') temp_features[subclass_level].featureitems.push(featureitem)
+                    subclass_levels_keys && subclass_levels_keys.map(function(subclass_level){
+                        const temp_level = subclass_levels[subclass_level]
+                        temp_level.levelitems.map(function(levelitem){
+                            levelitem.subclass = subclass_name
+                            levelitem.subclass_title = subclass_title
+                            if(typeof temp_levels[subclass_level] !== 'undefined' && typeof temp_levels[subclass_level].levelitems !== 'undefined') temp_levels[subclass_level].levelitems.push(levelitem)
                         })
                     })
                 }
             })
         }
-        setFeatureList(temp_features)
+        setFeatureList(temp_levels)
     }
 
     function setSubclassList(){
@@ -76,14 +78,14 @@ export default function ClassDetail(props){
                 temp_subclass.subclass_title = subclass_title
 
                 if(!!activeSubclass.includes(subclass_name)){
-                    const subclass_features = subclassesLevel[subclass_name].features
-                    const subclass_features_keys = Object.keys(subclass_features)
+                    const subclass_levels = subclassesLevel[subclass_name].levels
+                    const subclass_levels_keys = Object.keys(subclass_levels)
 
-                    subclass_features_keys && subclass_features_keys.map(function(subclass_level){
-                        const temp_feature = subclass_features[subclass_level]
-                        temp_feature.featureitems.map(function(featureitem){
-                            featureitem.subclass = subclass_name
-                            featureitem.subclass_title = subclass_title
+                    subclass_levels_keys && subclass_levels_keys.map(function(subclass_level){
+                        const temp_level = subclass_levels[subclass_level]
+                        temp_level.levelitems.map(function(levelitem){
+                            levelitem.subclass = subclass_name
+                            levelitem.subclass_title = subclass_title
                         })
                     })
                 }
@@ -94,15 +96,15 @@ export default function ClassDetail(props){
         return temp_subclasses
     }
 
-    async function getClassData(current_class) {
-        const classData = await getClasses(current_class);
+    async function getRaceData(current_race) {
+        const classData = await getRaces(current_race);
 
         if(typeof classData.name !== 'undefined') setClassName(classData.name)
         if(typeof classData.description !== 'undefined') setDesc(classData.description)
-        if(typeof classData.basic !== 'undefined') setBasic(classData.basic)
-        if(typeof classData.prof_bonus !== 'undefined') setProfBonus(classData.prof_bonus)
-        if(typeof classData.features !== 'undefined') setFeatures(classData.features)
-        if(typeof classData.subclasses !== 'undefined') setSubclassesLevel(classData.subclasses)
+        //if(typeof classData.basic !== 'undefined') setBasic(classData.basic)
+        //if(typeof classData.prof_bonus !== 'undefined') setProfBonus(classData.prof_bonus)
+        //if(typeof classData.levels !== 'undefined') setLevels(classData.levels)
+        //if(typeof classData.subclasses !== 'undefined') setSubclassesLevel(classData.subclasses)
     }
 
     function updateActiveSubclass(subclass){
@@ -127,15 +129,14 @@ export default function ClassDetail(props){
 
     useEffect(() => {
         getFeatureList()
-    }, [features, activeSubclass])
+    }, [levels, activeSubclass])
 
     useEffect(() => {
-        getClassData(currentClass)
-        setActiveSubclass([])
-    }, [currentClass])
+        getRaceData(currentRace)
+    }, [currentRace])
 
     useEffect(() => {
-        setCurrentClass(props.current_class)
+        setCurrentRace(props.current_race)
     }, [props])
 
     return(
@@ -179,15 +180,17 @@ export default function ClassDetail(props){
                 <div className="p-4">
                     <div className="text-2xl">職業特性</div>
                 </div>
+                {/*
                 <Classbasic basic={basic}/>
-                {/* -- 職業特性列表 -- */}
-                <ClassBasicLevelsTable features={features} className={className} profBonus={profBonus} onClick={handleClickScroll}/>
-                {/* -- 職業特性列表 -- */}
+                {/* -- 職業特性列表 -- /}
+                <ClassBasicLevelsTable levels={levels} className={className} profBonus={profBonus} onClick={handleClickScroll}/>
+                {/* -- 職業特性列表 -- /}
                 {/*
                     (subclassesLevel.length > 0) ? (<Subclasslist subclasses={subclassesLevel} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>) : ''
-                        */}
+                        /}
                 <Subclasslist subclasses={setSubclassList()} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>
                 <Levellist levellist={featureList} />
+                */}
             </div>
         </>
     )

@@ -33,13 +33,6 @@ export default function App(props){
         }]
     }
 
-    useEffect(() => {
-        async function getClassFromAPI() {
-            console.log(await getClasses('fighter'));
-        }
-        getClassFromAPI();
-    }, []);
-
     return(
     <div className="main">
         <div className="drawer bg-bg-base-300">
