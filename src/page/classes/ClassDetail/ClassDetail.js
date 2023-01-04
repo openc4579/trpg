@@ -13,6 +13,7 @@ export default function ClassDetail(props){
     const [className, setClassName] = useState('');
     const [features, setFeatures] = useState([]);
 
+    const [intro, setIntro] = useState([]);
     const [desc, setDesc] = useState([]);
     const [basic, setBasic] = useState([]);
     const [profBonus, setProfBonus] = useState([]);
@@ -98,6 +99,7 @@ export default function ClassDetail(props){
         const classData = await getClasses(current_class);
 
         if(typeof classData.name !== 'undefined') setClassName(classData.name)
+        if(typeof classData.intro !== 'undefined') setIntro(classData.intro)
         if(typeof classData.description !== 'undefined') setDesc(classData.description)
         if(typeof classData.basic !== 'undefined') setBasic(classData.basic)
         if(typeof classData.prof_bonus !== 'undefined') setProfBonus(classData.prof_bonus)
@@ -148,29 +150,47 @@ export default function ClassDetail(props){
                     <div className="md:shrink-0 p-4">
                         <img className="w-full object-cover" src={icons[currentClass+'Icon']} alt="Modern building architecture"/>
                     </div>
-                    <div className="p-4 hidden md:block">
-                        <div className="title text-xl font-medium">
-                            簡介
-                        </div>
-                        <div className="content">
+                    <div className="p-4">
+                        <div className="text-xl italic font-bold px-4">
                             {
-                                desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
+                                (intro.length > 0) ? 
+                                (
+                                    <>
+                                        <div className="text-left w-full">「</div>
+                                        {
+                                            intro && intro.map((i,key) => {
+                                                return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                            })
+                                        }
+                                        <div className="text-right w-full">」</div>
+                                    </>
+                                ) : null
                             }
                         </div>
-                    </div>
-                    <div className="collapse collapse-arrow md:hidden">
-                        <input type="checkbox" />
-                        <div className="collapse-title text-xl font-medium">
-                            簡介
+                        <div className="p-4 hidden md:block">
+                            <div className="title text-xl font-medium">
+                                簡介
+                            </div>
+                            <div className="content">
+                                {
+                                    desc && desc.map((i,key) => {
+                                        return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                    })
+                                }
+                            </div>
                         </div>
-                        <div className="collapse-content">
-                            {
-                                desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
+                        <div className="collapse collapse-arrow md:hidden">
+                            <input type="checkbox" />
+                            <div className="collapse-title text-xl font-medium">
+                                簡介
+                            </div>
+                            <div className="collapse-content">
+                                {
+                                    desc && desc.map((i,key) => {
+                                        return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -46,7 +46,7 @@ export default function Classes(){
             {
                 (currentClass != '') ?
                 (
-                    <ClassDetail current_class={currentClass} class_list={classesList}/>
+                    <ClassDetail current_class={currentClass} />
                 ) : null
             }
         </>

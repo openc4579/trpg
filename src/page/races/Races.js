@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 
 import SerachBox from '../../component/searchbox/SearchBox'
+import RaceDetail from './RaceDetail/RaceDetail'
 
 import {getRacesList} from '../../helper/controller';
 export default function Races(){
@@ -33,7 +34,7 @@ export default function Races(){
             {
                 (currentRace != '') ?
                 (
-                    <></>
+                    <RaceDetail current_race={currentRace} />
                 ) : null
             }
         </>
