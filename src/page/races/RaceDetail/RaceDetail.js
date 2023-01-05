@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import icons from '../../../component/icons/icons.js'
+import thumbnails from '../../../component/thumbnails/raceThumbnails.js'
 //import Levellist from '../../../component/levelline/Levellist'
 //import Classbasic from './Classbaisc'
 //import Subclasslist from './Subclasslist'
@@ -147,58 +147,101 @@ export default function RaceDetail(props){
                 <div className="text-3xl">{className}</div>
             </div>
             <div className="mx-auto bg-white border rounded-xl shadow-md overflow-hidden">
-                <div className="md:flex">
-                    <div className="md:shrink-0 p-4">
-                        <img className="w-full object-cover" src={icons[currentClass+'Icon']} alt="Modern building architecture"/>
+                <div className="md:shrink-0 p-4 md:float-left">
+                    <img className="w-full object-cover" src={thumbnails[currentRace+'Thumbnail']} alt="Modern building architecture"/>
+                </div>
+                <div className="p-4">
+                    <div className="text-xl italic font-bold px-4">
+                        {
+                            (intro.length > 0) ?
+                            (
+                                <>
+                                    <div className="text-left w-full">「</div>
+                                    {
+                                        intro && intro.map((i,key) => {
+                                            return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                        })
+                                    }
+                                    <div className="text-right w-full">」</div>
+                                </>
+                            ) : null
+                        }
                     </div>
-                    <div className="p-4">
-                        <div className="text-xl italic font-bold px-4">
+                    <div className="p-4 hidden md:block">
+                        <div className="title text-xl font-medium">
+                            簡介
+                        </div>
+                        <div className="content">
                             {
-                                (intro.length > 0) ? 
-                                (
-                                    <>
-                                        <div className="text-left w-full">「</div>
-                                        {
-                                            intro && intro.map((i,key) => {
-                                                return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                            })
-                                        }
-                                        <div className="text-right w-full">」</div>
-                                    </>
-                                ) : null
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
                             }
                         </div>
-                        <div className="p-4 hidden md:block">
-                            <div className="title text-xl font-medium">
-                                簡介
-                            </div>
-                            <div className="content">
-                                {
-                                    desc && desc.map((i,key) => {
-                                        return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                    })
-                                }
-                            </div>
+                    </div>
+                    <div className="collapse collapse-arrow md:hidden">
+                        <input type="checkbox" />
+                        <div className="collapse-title text-xl font-medium">
+                            簡介
                         </div>
-                        <div className="collapse collapse-arrow md:hidden">
-                            <input type="checkbox" />
-                            <div className="collapse-title text-xl font-medium">
-                                簡介
-                            </div>
-                            <div className="collapse-content">
-                                {
-                                    desc && desc.map((i,key) => {
-                                        return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                    })
-                                }
-                            </div>
+                        <div className="collapse-content">
+                            {
+                                desc && desc.map((i,key) => {
+                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
+                                })
+                            }
                         </div>
                     </div>
                 </div>
             </div>
             <div className="class-detail mt-6">
                 <div className="p-4">
-                    <div className="text-2xl">職業特性</div>
+                    <div className="text-2xl">種族特性</div>
                 </div>
                 {/*
                 <Classbasic basic={basic}/>

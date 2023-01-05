@@ -8,7 +8,7 @@ export default function Subclasslist(props){
     }
 
     return(
-        <div className="text-center my-8">
+        <div className="text-center mt-8">
             {
                 props.subclasses && props.subclasses.map(function(subclass_group, i){
                     const active = props.activeSubclass.includes(subclass_group.subclass)

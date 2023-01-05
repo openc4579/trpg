@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import icons from '../icons/icons.js'
+import icons from '../icons/classIcons.js'
 import {Link} from 'react-router-dom'
 
 import './searchbox.scss'
