@@ -6,7 +6,6 @@ export default function Classbasic(props){
                 {
                     Object.keys(props.basic).map((basic_key) => (
                         <div className="classbasic-hitpoint m-4" key={basic_key}>
-                            <div className="classbasic-hitpoint-title text-2xl font-bold">{props.basic[basic_key].title}</div>
                             {
                                 (()=>{
                                     const item = props.basic[basic_key]

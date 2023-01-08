@@ -1,0 +1,21 @@
+.nav{
+    .nav-item{
+        .nav-link{
+            color: #4b5563;
+            cursor: pointer;
+        }
+        .active{
+            color: #2563eb;
+            border-color: #2563eb;
+        }
+    }
+}
+
+.tab-content{
+    .tab-pane{
+        display: none;
+    }
+    .active{
+        display: block;
+    }
+}

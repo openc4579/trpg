@@ -75,6 +75,7 @@ export default function ClassDetail(props){
                 const subclass_title = subclassesLevel[subclass_name].title
                 temp_subclass.subclass = subclass_name
                 temp_subclass.subclass_title = subclass_title
+                temp_subclass.subclass_description = subclassesLevel[subclass_name].description
 
                 if(!!activeSubclass.includes(subclass_name)){
                     const subclass_features = subclassesLevel[subclass_name].features
@@ -180,7 +181,7 @@ export default function ClassDetail(props){
                     </div>
                     <div className="collapse collapse-arrow md:hidden">
                         <input type="checkbox" />
-                        <div className="collapse-title text-xl font-medium">
+                        <div className="collapse-title text-xl font-medium border-b-2 border-base-300">
                             簡介
                         </div>
                         <div className="collapse-content">

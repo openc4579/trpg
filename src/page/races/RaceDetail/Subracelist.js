@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Activebutton from "../../../component/activebutton/Activebutton";
 
-import './subclasslist.scss'
+import './subracelist.scss'
 
-export default function Subclasslist(props){
+export default function Subracelist(props){
     const [currentSubclassDes, setCurrentSubclassDes] = useState("");
 
     function updateActiveSubclass(subclass){

@@ -10,11 +10,11 @@ export function ClassBasicLevelsTable(props){
     return(
         <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-6 shadow-md">
             <input type="checkbox" />
-            <div className="collapse-title text-xl font-medium">
+            <div className="collapse-title text-xl font-medium border-b-2 border-base-300">
                 職業特性列表{' - '+props.className}
             </div>
             <div className="collapse-content">
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto my-4">
                     <table className="table table-zebra w-full">
                         <thead>
                             <tr>

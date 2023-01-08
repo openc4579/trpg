@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import thumbnails from '../../../component/thumbnails/raceThumbnails.js'
-//import Levellist from '../../../component/levelline/Levellist'
-//import Classbasic from './Classbaisc'
-//import Subclasslist from './Subclasslist'
+import Racebaisc from './Racebaisc'
+import Subracelist from './Subracelist'
 //import { ClassBasicLevelsTable } from './ClassBasicLevelsTable'
 
 import {getRaces} from '../../../helper/controller';
@@ -11,18 +10,15 @@ import {getRaces} from '../../../helper/controller';
 export default function RaceDetail(props){
     const [currentRace, setCurrentRace] = useState('');
 
-    const [currentClass, setCurrentClass] = useState('');
-    const [className, setClassName] = useState('');
+    const [raceName, setRaceName] = useState('');
     const [levels, setLevels] = useState([]);
 
     const [intro, setIntro] = useState([]);
     const [desc, setDesc] = useState([]);
     const [basic, setBasic] = useState([]);
-    const [profBonus, setProfBonus] = useState([]);
 
     const [featureList, setFeatureList] = useState([]);
-    const [subclassesLevel, setSubclassesLevel] = useState([]);
-    const [activeSubclass, setActiveSubclass] = useState([]);
+    const [subclassesLevel, setSubracesLevel] = useState([]);
 
     function getFeatureList(){
         const temp_levels = []
@@ -48,25 +44,23 @@ export default function RaceDetail(props){
             subclass_keys && subclass_keys.map(function(subclass_name){
                 const subclass_title = subclassesLevel[subclass_name].title
 
-                if(!!activeSubclass.includes(subclass_name)){
-                    const subclass_levels = subclassesLevel[subclass_name].levels
-                    const subclass_levels_keys = Object.keys(subclass_levels)
+                const subclass_levels = subclassesLevel[subclass_name].levels
+                const subclass_levels_keys = Object.keys(subclass_levels)
 
-                    subclass_levels_keys && subclass_levels_keys.map(function(subclass_level){
-                        const temp_level = subclass_levels[subclass_level]
-                        temp_level.levelitems.map(function(levelitem){
-                            levelitem.subclass = subclass_name
-                            levelitem.subclass_title = subclass_title
-                            if(typeof temp_levels[subclass_level] !== 'undefined' && typeof temp_levels[subclass_level].levelitems !== 'undefined') temp_levels[subclass_level].levelitems.push(levelitem)
-                        })
+                subclass_levels_keys && subclass_levels_keys.map(function(subclass_level){
+                    const temp_level = subclass_levels[subclass_level]
+                    temp_level.levelitems.map(function(levelitem){
+                        levelitem.subclass = subclass_name
+                        levelitem.subclass_title = subclass_title
+                        if(typeof temp_levels[subclass_level] !== 'undefined' && typeof temp_levels[subclass_level].levelitems !== 'undefined') temp_levels[subclass_level].levelitems.push(levelitem)
                     })
-                }
+                })
             })
         }
         setFeatureList(temp_levels)
     }
 
-    function setSubclassList(){
+    function setSubraceList(){
         const temp_subclasses = []
         const subclass_keys = Object.keys(subclassesLevel)
 
@@ -78,18 +72,16 @@ export default function RaceDetail(props){
                 temp_subclass.subclass = subclass_name
                 temp_subclass.subclass_title = subclass_title
 
-                if(!!activeSubclass.includes(subclass_name)){
-                    const subclass_levels = subclassesLevel[subclass_name].levels
-                    const subclass_levels_keys = Object.keys(subclass_levels)
+                const subclass_levels = subclassesLevel[subclass_name].levels
+                const subclass_levels_keys = Object.keys(subclass_levels)
 
-                    subclass_levels_keys && subclass_levels_keys.map(function(subclass_level){
-                        const temp_level = subclass_levels[subclass_level]
-                        temp_level.levelitems.map(function(levelitem){
-                            levelitem.subclass = subclass_name
-                            levelitem.subclass_title = subclass_title
-                        })
+                subclass_levels_keys && subclass_levels_keys.map(function(subclass_level){
+                    const temp_level = subclass_levels[subclass_level]
+                    temp_level.levelitems.map(function(levelitem){
+                        levelitem.subclass = subclass_name
+                        levelitem.subclass_title = subclass_title
                     })
-                }
+                })
 
                 temp_subclasses.push(temp_subclass)
             })
@@ -98,28 +90,14 @@ export default function RaceDetail(props){
     }
 
     async function getRaceData(current_race) {
-        const classData = await getRaces(current_race);
+        const raceData = await getRaces(current_race);
 
-        if(typeof classData.name !== 'undefined') setClassName(classData.name)
-        if(typeof classData.intro !== 'undefined') setIntro(classData.intro)
-        if(typeof classData.description !== 'undefined') setDesc(classData.description)
-        //if(typeof classData.basic !== 'undefined') setBasic(classData.basic)
-        //if(typeof classData.prof_bonus !== 'undefined') setProfBonus(classData.prof_bonus)
-        //if(typeof classData.levels !== 'undefined') setLevels(classData.levels)
-        //if(typeof classData.subclasses !== 'undefined') setSubclassesLevel(classData.subclasses)
-    }
-
-    function updateActiveSubclass(subclass){
-        const index = activeSubclass.indexOf(subclass)
-
-        const newActiveSubclass = [...activeSubclass]
-        if(index > -1){
-            newActiveSubclass.splice(index, 1)
-        }
-        else{
-            newActiveSubclass.push(subclass)
-        }
-        setActiveSubclass(newActiveSubclass)
+        if(typeof raceData.name !== 'undefined') setRaceName(raceData.name)
+        if(typeof raceData.intro !== 'undefined') setIntro(raceData.intro)
+        if(typeof raceData.description !== 'undefined') setDesc(raceData.description)
+        if(typeof raceData.basic !== 'undefined') setBasic(raceData.basic)
+        //if(typeof raceData.levels !== 'undefined') setLevels(raceData.levels)
+        if(typeof raceData.subraces !== 'undefined') setSubracesLevel(raceData.subraces)
     }
 
     function handleClickScroll(elementId){
@@ -131,7 +109,7 @@ export default function RaceDetail(props){
 
     useEffect(() => {
         getFeatureList()
-    }, [levels, activeSubclass])
+    }, [levels])
 
     useEffect(() => {
         getRaceData(currentRace)
@@ -144,7 +122,7 @@ export default function RaceDetail(props){
     return(
         <>
             <div className="p-8">
-                <div className="text-3xl">{className}</div>
+                <div className="text-3xl">{raceName}</div>
             </div>
             <div className="mx-auto bg-white border rounded-xl shadow-md overflow-hidden">
                 <div className="md:shrink-0 p-4 md:float-left">
@@ -177,51 +155,6 @@ export default function RaceDetail(props){
                                     return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
                                 })
                             }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
-                            {
-                                desc && desc.map((i,key) => {
-                                    return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                })
-                            }
                         </div>
                     </div>
                     <div className="collapse collapse-arrow md:hidden">
@@ -243,15 +176,9 @@ export default function RaceDetail(props){
                 <div className="p-4">
                     <div className="text-2xl">種族特性</div>
                 </div>
+                <Racebaisc basic={basic}/>
                 {/*
-                <Classbasic basic={basic}/>
-                {/* -- 職業特性列表 -- /}
-                <ClassBasicLevelsTable levels={levels} className={className} profBonus={profBonus} onClick={handleClickScroll}/>
-                {/* -- 職業特性列表 -- /}
-                {/*
-                    (subclassesLevel.length > 0) ? (<Subclasslist subclasses={subclassesLevel} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>) : ''
-                        /}
-                <Subclasslist subclasses={setSubclassList()} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>
+                <Subracelist featureList={featureList} subcraces={setSubraceList()}/>
                 <Levellist levellist={featureList} />
                 */}
             </div>
