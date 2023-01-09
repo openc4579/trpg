@@ -5,60 +5,96 @@ export default function Classbasic(props){
             <div className="p-4 md:p-8 md:grid gap-8 grid-cols-3">
                 {
                     Object.keys(props.basic).map((basic_key) => (
-                        <div className="classbasic-hitpoint m-4" key={basic_key}>
+                        <table className="classbasic-hitpoint m-4" key={basic_key}>
+                            <tbode>
                             {
                                 (()=>{
                                     const item = props.basic[basic_key]
                                     switch (basic_key) {
                                         case 'hp':
                                             return (
-                                                <div className="mt-4">
-                                                    <div className="text-lg"><span className="font-bold">生命骰： </span>{'1d'+item.dice}</div>
-                                                    <div className="text-lg"><span className="font-bold">首級生命值： </span>{+item.dice+' + 你的體質調整值'}</div>
-                                                    <div className="text-lg"><span className="font-bold">其後生命值： </span>{'一級之後每戰士等級 1d'+item.dice+' (or '+props.basic[basic_key].stand+') + 你的體質調整值'}</div>
-                                                </div>
+                                                <>
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">生命骰： </span></td>
+                                                        <td>{'1d'+item.dice}</td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">首級生命值： </span></td>
+                                                        <td>{+item.dice+' + 你的體質調整值'}</td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">其後生命值： </span></td>
+                                                        <td>{'一級之後每戰士等級 1d'+item.dice+' (or '+props.basic[basic_key].stand+') + 你的體質調整值'}</td>
+                                                    </tr>
+                                                </>
                                             )
                                         case 'prof':
                                             return (
-                                                <div className="mt-4">
-                                                    <div className="text-lg"><span className="font-bold">護甲： </span>{item.armor.join(', ')}</div>
-                                                    <div className="text-lg"><span className="font-bold">武器： </span>{item.weapon.join(', ')}</div>
-                                                    <div className="text-lg"><span className="font-bold">工具： </span>{item.tool.join(', ')}</div>
-                                                    <div className="text-lg"><span className="font-bold">豁免： </span>{item.saving_throw.join(', ')}</div>
-                                                    <div className="text-lg"><span className="font-bold">技能： </span>{'從 '+item.skill.choice.join(', ')+' 中選擇 '+item.skill.choice_num+' 個'}</div>
-                                                </div>
+                                                <>
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">護甲： </span></td>
+                                                        <td>{item.armor.join(', ')}</td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">武器： </span></td>
+                                                        <td>{item.weapon.join(', ')}</td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">工具： </span></td>
+                                                        <td>{item.tool.join(', ')}</td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">豁免： </span></td>
+                                                        <td>{item.saving_throw.join(', ')}</td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">技能： </span></td>
+                                                        <td>{'從 '+item.skill.choice.join(', ')+' 中選擇 '+item.skill.choice_num+' 個'}</td>
+                                                    </tr>
+                                                </>
                                             )
                                         case 'start_equipment':
                                             return (
-                                                <div className="mt-4">
-                                                    <div className="text-lg"><span className="font-bold">起始： </span></div>
-                                                    <div className="text-lg">{'你起始攜帶下列物品，以及任何你背景所提供的東西。'}</div>
-                                                    <ul className="levelline-item-sublist list-disc pl-6">
-                                                        {
-                                                            item.choice.map((choice_group, i)=>(
-                                                                <li className="py-2" key={i}>
-                                                                    <div className="text-lg">
-                                                                        {
-                                                                            (typeof choice_group.b !== 'undefined') ? ('(a)'+choice_group.a+' 或 (b)'+choice_group.b) : choice_group.a
-                                                                        }
-                                                                    </div>
-                                                                </li>
-                                                            ))
-                                                        }
-                                                    </ul>
-                                                    <div className="text-lg mt-4">
-                                                        {
-                                                            '或者，你可以選擇起始擁有 '+item.start_gold.dice_num+'d'+item.start_gold.dice+((typeof item.start_gold.magn !== 'undefined' && !!item.start_gold.magn) ? ' x'+item.start_gold.magn : '')+' 金幣以自行購買裝備。'
-                                                        }
-                                                    </div>
-                                                </div>
+                                                <>
+                                                    <tr className="text-lg">
+                                                        <td><span className="font-bold">起始： </span></td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td>{'你起始攜帶下列物品，以及任何你背景所提供的東西。'}</td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td>
+                                                            <ul className="levelline-item-sublist list-disc pl-6">
+                                                                {
+                                                                    item.choice.map((choice_group, i)=>(
+                                                                        <li className="py-2" key={i}>
+                                                                            <div className="text-lg">
+                                                                                {
+                                                                                    (typeof choice_group.b !== 'undefined') ? ('(a)'+choice_group.a+' 或 (b)'+choice_group.b) : choice_group.a
+                                                                                }
+                                                                            </div>
+                                                                        </li>
+                                                                    ))
+                                                                }
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    <tr className="text-lg">
+                                                        <td>
+                                                            {
+                                                                '或者，你可以選擇起始擁有 '+item.start_gold.dice_num+'d'+item.start_gold.dice+((typeof item.start_gold.magn !== 'undefined' && !!item.start_gold.magn) ? ' x'+item.start_gold.magn : '')+' 金幣以自行購買裝備。'
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </>
                                             )
                                         default:
                                             <></>
                                     }
                                 })()
                             }
-                        </div>
+                            </tbode>
+                        </table>
                     ))
                 }
             </div>

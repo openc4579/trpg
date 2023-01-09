@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import thumbnails from '../../../component/thumbnails/classThumbnails.js'
-import Levellist from '../../../component/levelline/Levellist'
+import Featurelist from '../../../component/levelline/Featurelist'
 import Classbasic from './Classbaisc'
 import Subclasslist from './Subclasslist'
 import { ClassBasicLevelsTable } from './ClassBasicLevelsTable'
@@ -205,8 +205,16 @@ export default function ClassDetail(props){
                 {/*
                     (subclassesLevel.length > 0) ? (<Subclasslist subclasses={subclassesLevel} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>) : ''
                         */}
-                <Subclasslist subclasses={setSubclassList()} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>
-                <Levellist levellist={featureList} />
+                {
+                    (()=>{
+                        const subclass_list = setSubclassList()
+                        (Object.keys(subclass_list).length > 0) ?
+                        (
+                            <Subclasslist subclasses={setSubclassList()} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>
+                        ) : null
+                    })
+                }
+                <Featurelist featureList={featureList} listtype="level"/>
             </div>
         </>
     )

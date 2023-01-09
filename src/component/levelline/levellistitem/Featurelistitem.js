@@ -1,8 +1,8 @@
 import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
 
-import LevellineIcon from './LevellineIcon'
+import FeaturelistIcon from './FeaturelistIcon'
 
-export default function Levellistitem(props){
+export default function Featurelistitem(props){
     return(
         <>
             {
@@ -12,7 +12,7 @@ export default function Levellistitem(props){
                         contentStyle={{ background: '#e6ecf1'}}
                         contentArrowStyle={{ display: 'none' }}
                         iconStyle={{ background: '#e6ecf1', color: 'rgb(33, 150, 243)' }}
-                        icon={<LevellineIcon leveltext={props.leveltext}/>}
+                        icon={<FeaturelistIcon leveltext={props.leveltext}/>}
                         iconClassName={(i != 0) ? 'icon-cacnel' : ''}
                         position='right'
                         textClassName="ml-0 md:ml-16"

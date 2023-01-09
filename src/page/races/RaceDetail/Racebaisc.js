@@ -6,23 +6,31 @@ export default function Classbasic(props){
                 {
                     Object.keys(props.basic).map((basic_key) => (
                         <div className="classbasic-hitpoint m-4" key={basic_key}>
-                            <div className="mt-4">
-                            {
-                                (()=>{
-                                    const item = props.basic[basic_key]
-                                    switch (basic_key) {
-                                        case 'age':
-                                            return (
-                                                <div className="text-lg"><span className="font-bold">年齡： </span>{item}</div>
-                                            )
-                                        case 'size':
-                                            return (
-                                                <div className="text-lg"><span className="font-bold">體型： </span>{item}</div>
-                                            )
-                                        case 'speed':
-                                            return (
-                                                <>
-                                                    <div className="text-lg"><span className="font-bold">速度： </span>
+                            <table className="mt-4">
+                                <tbody>
+                                {
+                                    (()=>{
+                                        const item = props.basic[basic_key]
+                                        switch (basic_key) {
+                                            case 'age':
+                                                return (
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">年齡：</span></td>
+                                                        <td>{item}</td>
+                                                    </tr>
+                                                )
+                                            case 'size':
+                                                return (
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">體型：</span></td>
+                                                        <td>{item}</td>
+                                                    </tr>
+                                                )
+                                            case 'speed':
+                                                return (
+                                                    <tr className="text-lg">
+                                                        <td className="truncate"><span className="font-bold">速度： </span></td>
+                                                        <td>
                                                         {
                                                             (()=>{
                                                                 let text = ''
@@ -54,17 +62,18 @@ export default function Classbasic(props){
                                                                         {text}
                                                                     </>
                                                                 )
-                                                            })() 
+                                                            })()
                                                         }
-                                                    </div>
-                                                </>
-                                            )
-                                        default:
-                                            <></>
-                                    }
-                                })() 
-                            }
-                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            default:
+                                                <></>
+                                        }
+                                    })()
+                                }
+                                </tbody>
+                            </table>
                         </div>
                     ))
                 }
