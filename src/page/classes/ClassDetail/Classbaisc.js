@@ -15,15 +15,15 @@ export default function Classbasic(props){
                                             return (
                                                 <>
                                                     <tr className="text-lg">
-                                                        <td className="truncate"><span className="font-bold">生命骰： </span></td>
+                                                        <td className="truncate align-top"><span className="font-bold">生命骰： </span></td>
                                                         <td>{'1d'+item.dice}</td>
                                                     </tr>
                                                     <tr className="text-lg">
-                                                        <td className="truncate"><span className="font-bold">首級生命值： </span></td>
+                                                        <td className="truncate align-top"><span className="font-bold">首級生命值： </span></td>
                                                         <td>{+item.dice+' + 你的體質調整值'}</td>
                                                     </tr>
                                                     <tr className="text-lg">
-                                                        <td className="truncate"><span className="font-bold">其後生命值： </span></td>
+                                                        <td className="truncate align-top"><span className="font-bold">其後生命值： </span></td>
                                                         <td>{'一級之後每戰士等級 1d'+item.dice+' (or '+props.basic[basic_key].stand+') + 你的體質調整值'}</td>
                                                     </tr>
                                                 </>
@@ -32,23 +32,23 @@ export default function Classbasic(props){
                                             return (
                                                 <>
                                                     <tr className="text-lg">
-                                                        <td className="truncate"><span className="font-bold">護甲： </span></td>
+                                                        <td className="truncate align-top"><span className="font-bold">護甲： </span></td>
                                                         <td>{item.armor.join(', ')}</td>
                                                     </tr>
                                                     <tr className="text-lg">
-                                                        <td className="truncate"><span className="font-bold">武器： </span></td>
+                                                        <td className="truncate align-top"><span className="font-bold">武器： </span></td>
                                                         <td>{item.weapon.join(', ')}</td>
                                                     </tr>
                                                     <tr className="text-lg">
-                                                        <td className="truncate"><span className="font-bold">工具： </span></td>
+                                                        <td className="truncate align-top"><span className="font-bold">工具： </span></td>
                                                         <td>{item.tool.join(', ')}</td>
                                                     </tr>
                                                     <tr className="text-lg">
-                                                        <td className="truncate"><span className="font-bold">豁免： </span></td>
+                                                        <td className="truncate align-top"><span className="font-bold">豁免： </span></td>
                                                         <td>{item.saving_throw.join(', ')}</td>
                                                     </tr>
                                                     <tr className="text-lg">
-                                                        <td className="truncate"><span className="font-bold">技能： </span></td>
+                                                        <td className="truncate align-top"><span className="font-bold">技能： </span></td>
                                                         <td>{'從 '+item.skill.choice.join(', ')+' 中選擇 '+item.skill.choice_num+' 個'}</td>
                                                     </tr>
                                                 </>

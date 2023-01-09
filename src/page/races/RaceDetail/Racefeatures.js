@@ -1,10 +1,11 @@
-export default function Classbasic(props){
+export default function Racefeatures(props){
 
     return(
         <div className="card border bg-base-100 shadow-xl">
             <div className="p-4 md:p-8">
                 {
-                    Object.keys(props.basic).map((basic_key) => (
+                    /*
+                    Object.keys(props.featureList).map((basic_key) => (
                         <div className="classbasic-hitpoint m-4" key={basic_key}>
                             <table className="mt-4">
                                 <tbody>
@@ -76,6 +77,7 @@ export default function Classbasic(props){
                             </table>
                         </div>
                     ))
+                    */
                 }
             </div>
         </div>

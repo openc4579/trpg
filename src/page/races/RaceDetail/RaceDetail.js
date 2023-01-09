@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import thumbnails from '../../../component/thumbnails/raceThumbnails.js'
 import Racebaisc from './Racebaisc'
+import Racefeatures from './Racefeatures'
 import Subracelist from './Subracelist'
 //import { ClassBasicLevelsTable } from './ClassBasicLevelsTable'
 
@@ -26,40 +27,35 @@ export default function RaceDetail(props){
         const default_feature_keys = Object.keys(defaultFeature)
         const subrace_keys = Object.keys(subraces)
 
-        /*
-        if(default_feature_keys.length > 0) {
-            default_feature_keys.map((level)=>{
-                const levelitems = levels[level]['levelitems'] ? levels[level]['levelitems'] : [];
-                if(levelitems.length > 0){
-                    temp_levels[level] = []
-                    temp_levels[level]['levelitems'] = [];
+        default_feature_keys && default_feature_keys.map((level)=>{
+            const featureitems = defaultFeature[level]['featureitems'] ? defaultFeature[level]['featureitems'] : [];
+            if(featureitems.length > 0){
+                temp_features[level] = []
+                temp_features[level]['featureitems'] = [];
 
-                    levelitems.map((levelitem)=>{
-                        temp_levels[level]['levelitems'].push(levelitem);
-                    })
-                }
-            })
-        }
+                featureitems.map((featureitem)=>{
+                    temp_features[level]['featureitems'].push(featureitem);
+                })
+            }
+        })
 
-        if(subclass_keys.length > 0){
+        subrace_keys && subrace_keys.map(function(subrace){
+            const subrace_title = subraces[subrace].title
 
-            subclass_keys && subclass_keys.map(function(subclass_name){
-                const subclass_title = subclassesLevel[subclass_name].title
+            if(activeSubrace === subrace){
+                const subrace_features = subraces[subrace].features
+                const subrace_levels_keys = Object.keys(subrace_features)
 
-                const subclass_levels = subclassesLevel[subclass_name].levels
-                const subclass_levels_keys = Object.keys(subclass_levels)
-
-                subclass_levels_keys && subclass_levels_keys.map(function(subclass_level){
-                    const temp_level = subclass_levels[subclass_level]
-                    temp_level.levelitems.map(function(levelitem){
-                        levelitem.subclass = subclass_name
-                        levelitem.subclass_title = subclass_title
-                        if(typeof temp_levels[subclass_level] !== 'undefined' && typeof temp_levels[subclass_level].levelitems !== 'undefined') temp_levels[subclass_level].levelitems.push(levelitem)
+                subrace_levels_keys && subrace_levels_keys.map(function(subrace_level){
+                    const temp_level = subrace_features[subrace_level]
+                    temp_level.featureitems.map(function(featureitem){
+                        featureitem.subrace = subrace
+                        featureitem.subrace_title = subrace_title
+                        if(typeof temp_features[subrace_level] !== 'undefined' && typeof temp_features[subrace_level].featureitems !== 'undefined') temp_features[subrace_level].featureitems.push(featureitem)
                     })
                 })
-            })
-        }
-        */
+            }
+        })
         setFeatureList(temp_features)
     }
 
@@ -101,7 +97,7 @@ export default function RaceDetail(props){
         if(typeof raceData.intro !== 'undefined') setIntro(raceData.intro)
         if(typeof raceData.description !== 'undefined') setDesc(raceData.description)
         if(typeof raceData.basic !== 'undefined') setBasic(raceData.basic)
-        //if(typeof raceData.levels !== 'undefined') setLevels(raceData.levels)
+        if(typeof raceData.features !== 'undefined') setDefaultFeature(raceData.features)
         if(typeof raceData.subraces !== 'undefined') setSubraces(raceData.subraces)
     }
 
@@ -114,7 +110,7 @@ export default function RaceDetail(props){
 
     useEffect(() => {
         getFeatureList()
-    }, [defaultFeature])
+    }, [activeSubrace, defaultFeature])
 
     useEffect(() => {
         getRaceData(currentRace)
@@ -177,15 +173,15 @@ export default function RaceDetail(props){
                     </div>
                 </div>
             </div>
+            <div className="race-subrace-description mt-6 p-4">
+                <Subracelist subcraces={setSubraceList()} onClick={updateActiveSubrace} activeSubrace={activeSubrace}/>
+            </div>
             <div className="class-detail mt-6">
                 <div className="p-4">
                     <div className="text-2xl">種族特性</div>
                 </div>
-                <Racebaisc basic={basic}/>
-                <Subracelist featureList={featureList} subcraces={setSubraceList()} onClick={updateActiveSubrace} activeSubrace={activeSubrace}/>
-                {/*
-                <Levellist levellist={featureList} />
-                */}
+                <Racebaisc basic={basic} />
+                <Racefeatures featureList={featureList} />
             </div>
         </>
     )

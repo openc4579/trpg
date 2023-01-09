@@ -23,6 +23,7 @@ export default function Subracelist(props){
             }
             else {
                 setCurrentSubrace(props.subcraces[0].subrace)
+                props.onClick(props.subcraces[0].subrace)
             }
         }
         return () => {
