@@ -173,15 +173,26 @@ export default function RaceDetail(props){
                     </div>
                 </div>
             </div>
-            <div className="race-subrace-description mt-6 p-4">
-                <Subracelist subcraces={setSubraceList()} onClick={updateActiveSubrace} activeSubrace={activeSubrace}/>
-            </div>
+            {
+                (
+                    (Object.keys(setSubraceList()).length > 0) ?
+                    (
+                        <div className="race-subrace-description mt-6 p-4">
+                            <Subracelist subcraces={setSubraceList()} onClick={updateActiveSubrace} activeSubrace={activeSubrace}/>
+                        </div>
+                    ) : null
+                )
+            }
             <div className="class-detail mt-6">
                 <div className="p-4">
                     <div className="text-2xl">種族特性</div>
                 </div>
-                <Racebaisc basic={basic} />
-                <Racefeatures featureList={featureList} />
+                <div className="p-4">
+                    <Racebaisc basic={basic} />
+                </div>
+                <div className="p-4">
+                    <Racefeatures featureList={featureList} />
+                </div>
             </div>
         </>
     )

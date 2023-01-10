@@ -6,7 +6,7 @@ export default function Classbasic(props){
                 {
                     Object.keys(props.basic).map((basic_key) => (
                         <table className="classbasic-hitpoint m-4" key={basic_key}>
-                            <tbode>
+                            <tbody>
                             {
                                 (()=>{
                                     const item = props.basic[basic_key]
@@ -93,7 +93,7 @@ export default function Classbasic(props){
                                     }
                                 })()
                             }
-                            </tbode>
+                            </tbody>
                         </table>
                     ))
                 }

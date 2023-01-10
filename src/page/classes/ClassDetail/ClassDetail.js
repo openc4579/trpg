@@ -206,13 +206,13 @@ export default function ClassDetail(props){
                     (subclassesLevel.length > 0) ? (<Subclasslist subclasses={subclassesLevel} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>) : ''
                         */}
                 {
-                    (()=>{
-                        const subclass_list = setSubclassList()
-                        (Object.keys(subclass_list).length > 0) ?
+                    (
+                        (Object.keys(setSubclassList()).length > 0) ?
                         (
                             <Subclasslist subclasses={setSubclassList()} activeSubclass={activeSubclass} onClick={updateActiveSubclass}/>
                         ) : null
-                    })
+                    )
+
                 }
                 <Featurelist featureList={featureList} listtype="level"/>
             </div>
