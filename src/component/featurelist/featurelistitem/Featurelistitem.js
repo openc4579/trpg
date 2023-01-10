@@ -42,7 +42,7 @@ export default function Featurelistitem(props){
                                         選項：
                                     </div>
                                     <div className="collapse-content">
-                                        <ul className="levelline-item-sublist list-disc pl-6 mt-4">
+                                        <ul className="featurelist-item-sublist list-disc pl-6 mt-4">
                                             {
                                                 featureitemdetail.sublist.map((sublistitem, si)=>(
                                                     <li key={'level'+i+'-sub'+si} className="py-2">

@@ -64,7 +64,7 @@ export default function Classbasic(props){
                                                     </tr>
                                                     <tr className="text-lg">
                                                         <td>
-                                                            <ul className="levelline-item-sublist list-disc pl-6">
+                                                            <ul className="featurelist-item-sublist list-disc pl-6">
                                                                 {
                                                                     item.choice.map((choice_group, i)=>(
                                                                         <li className="py-2" key={i}>

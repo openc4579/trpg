@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import thumbnails from '../../../component/thumbnails/classThumbnails.js'
-import Featurelist from '../../../component/levelline/Featurelist'
+import Featurelist from '../../../component/featurelist/Featurelist'
 import Classbasic from './Classbaisc'
 import Subclasslist from './Subclasslist'
 import { ClassBasicLevelsTable } from './ClassBasicLevelsTable'

@@ -188,10 +188,15 @@ export default function RaceDetail(props){
                     <div className="text-2xl">種族特性</div>
                 </div>
                 <div className="p-4">
-                    <Racebaisc basic={basic} />
-                </div>
-                <div className="p-4">
-                    <Racefeatures featureList={featureList} />
+                    <div className="card border bg-base-100 shadow-xl">
+                        <Racebaisc basic={basic} />
+                        {/* -- 分隔線 -- */}
+                        <div className="px-4 md:px-8">
+                            <div className="border-y border-y-gray"></div>
+                        </div>
+                        {/* -- 分隔線 -- */}
+                        <Racefeatures featureList={featureList} />
+                    </div>
                 </div>
             </div>
         </>
