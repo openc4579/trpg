@@ -22,14 +22,14 @@ export default function Classbasic(props){
                                             return (
                                                 <tr className="text-lg">
                                                     <td className="truncate align-top"><span className="font-bold">體型：</span></td>
-                                                    <td>{item}</td>
+                                                    <td className="align-top">{item}</td>
                                                 </tr>
                                             )
                                         case 'speed':
                                             return (
                                                 <tr className="text-lg">
                                                     <td className="truncate align-top"><span className="font-bold">速度： </span></td>
-                                                    <td>
+                                                    <td className="align-top">
                                                     {
                                                         (()=>{
                                                             let text = ''

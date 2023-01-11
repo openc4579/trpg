@@ -40,7 +40,7 @@ export default function App(props){
             <div className="drawer-content flex flex-col">
                 <Navbar menuList={menulist} />
                 <div className="content mt-16 overflow-x-auto">
-                    <div className="container mx-auto p-4">
+                    <div className="container mx-auto p-4 max-w-5xl">
                         <AppRouter />
                     </div>
                 </div>

@@ -1,19 +1,32 @@
-import React from 'react'
+import { useEffect } from "react"
 
-export default function Racefeature(props){
-    console.log(props)
+import './racefeatureitem.scss';
+
+export default function Racefeatureitem(props){
+        console.log(props)
+
     return(
-        <div calssName="p-2">
-            <div className="text-2xl font-bold">{props.featureitem.title}</div>
-            {
-                (typeof props.featureitem.subcrace_title !== "undefined" && props.featureitem.subcrace_title !== '') ? 
-                (
-                    <div className="vertical-timeline-element-subtitle">
-                        <span className="font-bold ml-4 text-lg">{'('+props.featureitem.subcrace_title+')'}</span>
-                    </div>
-                ) : null
-            }
-            
+        <div className="race-feature-item px-2 py-4 md:p-4">
+            <div className="text-xl font-bold mb-2 inline-block align-middle">
+                {
+                    (typeof props.featureitem.subrace_title === "undefined" || props.featureitem.subrace_title === '') ? (
+                        <span className="race-title flex items-center">
+                            {props.featureitem.title}
+                        </span>
+                    ) : (
+                        <span className="subrace-title flex items-center">
+                            {props.featureitem.title}
+                            {
+                                (typeof props.featureitem.subrace_title !== "undefined" && props.featureitem.subrace_title !== '') ?
+                                (
+                                    <span className="opacity-70 font-bold ml-4 text-lg">{'('+props.featureitem.subrace_title+')'}</span>
+                                ) : null
+                            }
+                        </span>
+                    )
+                }
+            </div>
+
             <div>
                 {
                     props.featureitem.description && props.featureitem.description.map((i,key) => {
