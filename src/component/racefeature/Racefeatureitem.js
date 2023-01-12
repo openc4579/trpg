@@ -3,8 +3,6 @@ import { useEffect } from "react"
 import './racefeatureitem.scss';
 
 export default function Racefeatureitem(props){
-        console.log(props)
-
     return(
         <div className="race-feature-item px-2 py-4 md:p-4">
             <div className="text-xl font-bold mb-2 inline-block align-middle">
