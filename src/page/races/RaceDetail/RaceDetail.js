@@ -62,6 +62,7 @@ export default function RaceDetail(props){
     function setRaceBasic(){
         const temp_basics = {}
         const basic_keys = Object.keys(basic)
+        const subrace_keys = Object.keys(subraces)
 
         if(basic_keys.length > 0){
             basic_keys.map((basic_key)=>{
@@ -77,28 +78,30 @@ export default function RaceDetail(props){
             })
         }
 
-        /*
         if(subrace_keys.length > 0){
 
             subrace_keys && subrace_keys.map(function(subrace){
-                const temp_subrace={}
-                const subrace_item = subraces[subrace]
-                const subrace_title = subrace_item.title
-                temp_subrace.subrace = subrace
-                temp_subrace.subrace_title = subrace_title
-                temp_subrace.subrace_description = subrace_item.description
-
-                subrace_item.features && subrace_item.features.map(function(subrace_features){
-                    subrace_features.featureitems.map(function(featureitem){
-                        featureitem.subrace = subrace
-                        featureitem.subrace_title = subrace_title
-                    })
-                })
-
-                temp_subraces.push(temp_subrace)
+                if(subrace == activeSubrace){
+                    const subrace_item = subraces[subrace]
+                    const subrace_basic = subrace_item.basic
+                    const subrace_basic_keys = Object.keys(subrace_basic)
+    
+                    if(subrace_basic_keys.length > 0){
+                        subrace_basic_keys.map((subrace_basic_key)=>{
+                            if(typeof temp_basics[subrace_basic_key] === 'undefined') temp_basics[subrace_basic_key] = {}
+                            if(subrace_basic_key !== 'prof') {
+                                temp_basics[subrace_basic_key]['subrace'] = subrace_basic[subrace_basic_key]
+                            } else {
+                                Object.keys(subrace_basic[subrace_basic_key]).map((prof_type)=>{
+                                    if(typeof temp_basics[subrace_basic_key][prof_type] === 'undefined') temp_basics[subrace_basic_key][prof_type] = {}
+                                    temp_basics[subrace_basic_key][prof_type]['subrace'] = subrace_basic[subrace_basic_key][prof_type]
+                                })
+                            }
+                        })
+                    }
+                }
             })
         }
-        */
         return temp_basics
     }
 

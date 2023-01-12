@@ -1,10 +1,12 @@
 .racebasic{
     .racebasic-item{
         .racebasic-item-race-item{
-            border-bottom: 2px dotted #2196f3;
+            border-bottom: 3px dotted #2196f3;
+            //color: #0d5a99;
         }
         .racebasic-item-subrace-item{
-            color: #e91e63;
+            border-bottom: 3px dotted #e91e63;
+            //color: #800a31;
         }
     }
 }
