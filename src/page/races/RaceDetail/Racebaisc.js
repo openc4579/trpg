@@ -199,81 +199,157 @@ console.log(props)
                                                     <td className="align-top">
                                                     {
                                                         (()=>{
-                                                            Object.keys(item).map((prof_type)=>(
-                                                                <div key={prof_type}>
-                                                                    {
-                                                                        console.log("someyhing")
-                                                                                            /*
-                                                                        (()=>{
-                                                                            let prof_type_string = ''
+                                                            return(
+                                                                Object.keys(item).map((prof_type)=>(
+                                                                    <div key={prof_type}>
+                                                                        {
+                                                                            (()=>{
+                                                                                let prof_type_string = ''
 
-                                                                            switch (prof_type) {
-                                                                                case 'weapon':
-                                                                                    prof_type_string = '武器'
-                                                                                    break
-                                                                                case 'skills':
-                                                                                    prof_type_string = '技能'
-                                                                                    break
-                                                                                case 'language':
-                                                                                    prof_type_string = '語言'
-                                                                                    break
-                                                                                case 'armor':
-                                                                                    prof_type_string = '護甲'
-                                                                                    break
-                                                                                default:
-                                                                                    prof_type_string = ''
-                                                                            }
+                                                                                switch (prof_type) {
+                                                                                    case 'weapon':
+                                                                                        prof_type_string = '武器'
+                                                                                        break
+                                                                                    case 'skills':
+                                                                                        prof_type_string = '技能'
+                                                                                        break
+                                                                                    case 'language':
+                                                                                        prof_type_string = '語言'
+                                                                                        break
+                                                                                    case 'armor':
+                                                                                        prof_type_string = '護甲'
+                                                                                        break
+                                                                                    default:
+                                                                                        prof_type_string = ''
+                                                                                }
 
-                                                                            if(prof_type_string !== '') {
-                                                                                return(
-                                                                                    <>
-                                                                                        <span className="font-bold">{prof_type_string+"："}</span>
-                                                                                        <span>
-                                                                                        {
-                                                                                            Object.keys(item[prof_type]).map((race_type)=>(
-                                                                                                <span key={race_type} className={"leading-relaxed mx-2" + ((race_type==='default') ? " racebasic-item-race-item" : " racebasic-item-subrace-item")}>
-                                                                                                    {
-                                                                                                race_type
-                                                                                                        (()=>{
-                                                                                                            let text = ''
-                                                                                                            const prof_item = item[prof_type][race_type]
-                                                                                                            let prof_item_string = ''
+                                                                                if(prof_type_string !== '') {
+                                                                                    return(
+                                                                                        <>
+                                                                                            <span className="font-bold">{prof_type_string+"："}</span>
+                                                                                            <span>
+                                                                                            {
+                                                                                                Object.keys(item[prof_type]).map((race_type)=>(
+                                                                                                    <span key={race_type} className={"leading-relaxed mx-2" + ((race_type==='default') ? " racebasic-item-race-item" : " racebasic-item-subrace-item")}>
+                                                                                                        {
+                                                                                                            (()=>{
+                                                                                                                let text = ''
+                                                                                                                const prof_item = item[prof_type][race_type]
+                                                                                                                let prof_item_string = ''
 
-                                                                                                            let prof_items_split = prof_item.split('|')
+                                                                                                                let prof_items_split = prof_item.split('|')
 
-                                                                                                            if(prof_items_split.length > 0){
-                                                                                                                for(let j=0; j<prof_items_split.length; j++) {
-                                                                                                                    prof_item_string += prof_items_split[j]
-                                                                                                                    prof_item_string += (j==prof_items_split.length-1) ? "。" : "，"
+                                                                                                                if(prof_items_split.length > 0){
+                                                                                                                    for(let j=0; j<prof_items_split.length; j++) {
+                                                                                                                        prof_item_string += prof_items_split[j]
+                                                                                                                        prof_item_string += (j==prof_items_split.length-1) ? "。" : "，"
+                                                                                                                    }
+                                                                                                                    text += prof_item_string
                                                                                                                 }
-                                                                                                                text += prof_item_string
-                                                                                                            }
 
-                                                                                                            return(
-                                                                                                                <>
-                                                                                                                    {text}
-                                                                                                                </>
-                                                                                                            )
-                                                                                                        })()
-                                                                                                    }
-                                                                                                </span>
-                                                                                            ))
-                                                                                        }
-                                                                                        </span>
-                                                                                    </>
-                                                                                )
-                                                                            }  
-                                                                        })()
-                                                                                            */
-                                                                    }
-                                                                </div>
-                                                            ))
+                                                                                                                return(
+                                                                                                                    <>
+                                                                                                                        {text}
+                                                                                                                    </>
+                                                                                                                )
+                                                                                                            })()
+                                                                                                        }
+                                                                                                    </span>
+                                                                                                ))
+                                                                                            }
+                                                                                            </span>
+                                                                                        </>
+                                                                                    )
+                                                                                }
+                                                                            })()
+                                                                        }
+                                                                    </div>
+                                                                ))
+                                                            )
                                                         })()
                                                     }
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                )
+                            case 'spell':
+                                return (
+                                    <div className="racebasic-item m-4" key={basic_key}>
+                                        <table className="mt-4">
+                                            <tbody>
+                                                <tr className="text-lg">
+                                                    <td className="truncate align-top"><span className="font-bold">天生施法：</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div className="relative rounded-xl overflow-auto">
+                                            <div className="shadow-sm overflow-hidden my-8">
+                                                <table className="natural-spell-table table table-compact w-full">
+                                                    <thead>
+                                                        <tr>
+                                                            <td className="text-bold">等級</td>
+                                                            <td className="text-bold">法術</td>
+                                                            <td className="text-bold">次數</td>
+                                                            <td className="text-bold">備註</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {
+                                                        (()=>{
+                                                            return(
+                                                                Object.keys(item).map((race_type)=>{
+                                                                    const feature_group = item[race_type]
+                                                                    const feature_group_names = Object.keys(feature_group)
+                                                                    return(
+                                                                        feature_group_names && feature_group_names.map((feature_group_name)=>{
+                                                                            const spell_item = feature_group[feature_group_name]
+                                                                            const spells = spell_item.spells
+                                                                            const spells_level = Object.keys(spells)
+                                                                            return(
+                                                                                <>
+                                                                                    <tr className={(race_type === 'default') ? "race-natural-spell-title" : "subrace-natural-spell-title"}>
+                                                                                        <td colSpan="2">{feature_group_name + " (" + spell_item.recover + ")"}</td>
+                                                                                        <td colSpan="2">{spell_item.remark}</td>
+                                                                                    </tr>
+                                                                                    {
+                                                                                        spells_level && spells_level.map((level)=>{
+                                                                                            const spells_by_level = spells[level]
+                                                                                            const spells_name = Object.keys(spells_by_level)
+                                                                                            return(
+                                                                                                spells_name && spells_name.map((spell_name, i)=>{
+                                                                                                    return(
+                                                                                                        <tr className={(race_type === 'default') ? "race-natural-spell-item" : "subrace-natural-spell-item"}>
+                                                                                                            {
+                                                                                                                (i==0) ? (<td rowSpan={spells_name.length}>{level}</td>) : null
+                                                                                                            }
+                                                                                                            <td>{spell_name}</td>
+                                                                                                            <td>{spells_by_level[spell_name].time}</td>
+                                                                                                            <td>{spells_by_level[spell_name].remark}</td>
+                                                                                                        </tr>
+                                                                                                    )
+                                                                                                })
+                                                                                            )
+                                                                                        })
+                                                                                    }
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    )
+                                                                    /*
+                                                                    <span key={race_type} className={"leading-relaxed mx-2" + ((race_type==='default') ? " racebasic-item-race-item" : " racebasic-item-subrace-item")}>
+                                                                        {item[race_type] + ' 英呎。'}
+                                                                    </span>
+                                                                    */
+                                                                })
+                                                            )
+                                                        })()
+                                                    }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             default:
