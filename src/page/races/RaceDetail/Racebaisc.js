@@ -285,7 +285,7 @@ console.log(props)
                                             </tbody>
                                         </table>
                                         <div className="relative rounded-xl overflow-auto">
-                                            <div className="shadow-sm overflow-hidden my-8">
+                                            <div className="shadow-sm overflow-hidden">
                                                 <table className="natural-spell-table table table-compact w-full">
                                                     <thead>
                                                         <tr>

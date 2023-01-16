@@ -30,7 +30,7 @@ export default function Races(){
             <div className="p-8">
                 <div className="text-4xl">種族</div>
             </div>
-            <SerachBox search_title="種族列表" display_lists={raceList} has_icon={false} path_root="/race" extend={(currentRace != '') ? false : true}/>
+            <SerachBox search_title="種族列表" display_lists={raceList} has_icon={false} path_root="/race" detail={(currentRace != '') ? false : true}/>
             {
                 (currentRace != '') ?
                 (
