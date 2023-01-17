@@ -42,7 +42,7 @@ export default function Classes(){
             <div className="p-8">
                 <div className="text-4xl">職業</div>
             </div>
-            <SerachBox search_title="職業列表" display_lists={classesList} has_icon={true} path_root="/class" detail={(currentClass != '') ? false : true}/>
+            <SerachBox search_title="職業列表" display_lists={classesList} has_icon={true} path_root="/class" detail={(currentClass != '') ? false : true} fixed_display_grid={true}/>
             {
                 (currentClass != '') ?
                 (

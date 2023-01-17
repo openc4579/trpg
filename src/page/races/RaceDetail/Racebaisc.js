@@ -299,7 +299,7 @@ console.log(props)
                                                     {
                                                         (()=>{
                                                             return(
-                                                                Object.keys(item).map((race_type)=>{
+                                                                Object.keys(item).map((race_type, i)=>{
                                                                     const feature_group = item[race_type]
                                                                     const feature_group_names = Object.keys(feature_group)
                                                                     return(
@@ -309,7 +309,7 @@ console.log(props)
                                                                             const spells_level = Object.keys(spells)
                                                                             return(
                                                                                 <>
-                                                                                    <tr className={(race_type === 'default') ? "race-natural-spell-title" : "subrace-natural-spell-title"}>
+                                                                                    <tr key={i} className={(race_type === 'default') ? "race-natural-spell-title" : "subrace-natural-spell-title"}>
                                                                                         <td colSpan="2">{feature_group_name + " (" + spell_item.recover + ")"}</td>
                                                                                         <td colSpan="2">{spell_item.remark}</td>
                                                                                     </tr>
