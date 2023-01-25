@@ -9,7 +9,10 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    require("daisyui")
+  ],
   daisyui: {
     styled: true,
     themes: ['winter'],

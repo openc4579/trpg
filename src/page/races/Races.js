@@ -8,7 +8,10 @@ import {getRacesList} from '../../helper/controller';
 export default function Races(){
     const param_race = useParams()
 
+    console.log(param_race)
+
     const [currentRace, setCurrentRace] = useState('')
+    const [currentSubrace, setCurrentSubrace] = useState('')
     const [raceList, setRaceList] = useState([])
 
     async function getRacesListData() {
@@ -19,6 +22,7 @@ export default function Races(){
 
     useEffect(() => {
         if(typeof param_race.race !== 'undefined') setCurrentRace(param_race.race)
+        if(typeof param_race.subrace !== 'undefined') setCurrentSubrace(param_race.subrace)
     }, [raceList, param_race])
 
     useEffect(() => {
@@ -34,7 +38,7 @@ export default function Races(){
             {
                 (currentRace != '') ?
                 (
-                    <RaceDetail current_race={currentRace} />
+                    <RaceDetail current_race={currentRace} current_subrace={currentSubrace} />
                 ) : null
             }
         </>

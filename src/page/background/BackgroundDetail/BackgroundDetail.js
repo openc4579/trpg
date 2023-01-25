@@ -1,64 +1,22 @@
 import { useState, useEffect } from 'react'
-import thumbnails from '../../../component/thumbnails/raceThumbnails.js'
-import Racebaisc from './Racebaisc'
-import Racefeatures from './Racefeatures'
-import Subracelist from './Subracelist'
-//import { ClassBasicLevelsTable } from './ClassBasicLevelsTable'
+import Backgroundbaisc from './Backgroundbaisc.js';
 
-import {getRaces} from '../../../helper/controller';
+import {getBackground} from '../../../helper/controller';
 
 
-export default function RaceDetail(props){
-    const [currentRace, setCurrentRace] = useState('');
+export default function BackgroundDetail(props){
+    const [currentBackground, setCurrentBackground] = useState('');
 
-    const [raceName, setRaceName] = useState('');
-    const [defaultFeature, setDefaultFeature] = useState([]);
-
-    const [intro, setIntro] = useState([]);
+    const [backgroundName, setBackgroundName] = useState('');
     const [desc, setDesc] = useState([]);
-    const [basic, setBasic] = useState([]);
 
-    const [featureList, setFeatureList] = useState([]);
-    const [subraces, setSubraces] = useState([]);
-    const [activeSubrace, setActiveSubrace] = useState('');
+    const [skill, setSkill] = useState({});
+    const [language, setLanguage] = useState({});
+    const [tool, setTool] = useState({});
+    const [item, setItem] = useState([]);
+    const [feature, setFeature] = useState({});
 
-    function getFeatureList(){
-        const temp_features = []
-        const default_feature_keys = Object.keys(defaultFeature)
-        const subrace_keys = Object.keys(subraces)
-
-        default_feature_keys && default_feature_keys.map((level)=>{
-            const featureitems = defaultFeature[level]['featureitems'] ? defaultFeature[level]['featureitems'] : [];
-            if(featureitems.length > 0){
-                temp_features[level] = []
-                temp_features[level]['featureitems'] = [];
-
-                featureitems.map((featureitem)=>{
-                    temp_features[level]['featureitems'].push(featureitem);
-                })
-            }
-        })
-
-        subrace_keys && subrace_keys.map(function(subrace){
-            const subrace_title = subraces[subrace].title
-
-            if(activeSubrace === subrace){
-                const subrace_features = subraces[subrace].features
-                const subrace_levels_keys = Object.keys(subrace_features)
-
-                subrace_levels_keys && subrace_levels_keys.map(function(subrace_level){
-                    const temp_level = subrace_features[subrace_level]
-                    temp_level.featureitems.map(function(featureitem){
-                        featureitem.subrace = subrace
-                        featureitem.subrace_title = subrace_title
-                        if(typeof temp_features[subrace_level] !== 'undefined' && typeof temp_features[subrace_level].featureitems !== 'undefined') temp_features[subrace_level].featureitems.push(featureitem)
-                    })
-                })
-            }
-        })
-        setFeatureList(temp_features)
-    }
-
+    /*
     function setRaceBasic(){
         const temp_basics = {}
         const basic_keys = Object.keys(basic)
@@ -131,68 +89,40 @@ export default function RaceDetail(props){
         }
         return temp_subraces
     }
+    */
 
-    function updateActiveSubrace(subrace){
-        setActiveSubrace(subrace)
-    }
+    async function getBackgroundData(current_race) {
+        const backgroundData = await getBackground(current_race);
 
-    async function getRaceData(current_race) {
-        const raceData = await getRaces(current_race);
-
-        if(typeof raceData.name !== 'undefined') setRaceName(raceData.name)
-        if(typeof raceData.intro !== 'undefined') setIntro(raceData.intro)
-        if(typeof raceData.description !== 'undefined') setDesc(raceData.description)
-        if(typeof raceData.basic !== 'undefined') setBasic(raceData.basic)
-        if(typeof raceData.features !== 'undefined') setDefaultFeature(raceData.features)
-        if(typeof raceData.subraces !== 'undefined') setSubraces(raceData.subraces)
-    }
-
-    function handleClickScroll(elementId){
-        const element = document.getElementById(elementId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', inline: 'start' });
-        }
+        if(typeof backgroundData.name !== 'undefined') setBackgroundName(backgroundData.name)
+        if(typeof backgroundData.description !== 'undefined') setDesc(backgroundData.description)
+        if(typeof backgroundData.skill !== 'undefined') setSkill(backgroundData.skill)
+        if(typeof backgroundData.language !== 'undefined') setLanguage(backgroundData.language)
+        if(typeof backgroundData.tool !== 'undefined') setTool(backgroundData.tool)
+        if(typeof backgroundData.item !== 'undefined') setItem(backgroundData.item)
+        if(typeof backgroundData.feature !== 'undefined') setFeature(backgroundData.feature)
     }
 
     useEffect(() => {
-        getFeatureList()
-    }, [activeSubrace, defaultFeature])
+        getBackgroundData(currentBackground)
+    }, [currentBackground])
 
     useEffect(() => {
-        getRaceData(currentRace)
-    }, [currentRace])
-
-    useEffect(() => {
-        setCurrentRace(props.current_race)
-        setActiveSubrace(props.current_subrace)
+        setCurrentBackground(props.current_background)
     }, [props])
 
     return(
         <>
             <div className="p-8">
-                <div className="text-3xl">{raceName}</div>
+                <div className="text-3xl">{backgroundName}</div>
             </div>
             <div className="mx-auto bg-white border rounded-xl shadow-md overflow-hidden">
                 <div className="md:shrink-0 p-4 md:float-left">
+                    {/*
                     <img className="w-full object-cover" src={thumbnails[currentRace+'Thumbnail']} alt="Modern building architecture"/>
+                    */}
                 </div>
                 <div className="p-4">
-                    <div className="text-xl italic font-bold px-4">
-                        {
-                            (intro.length > 0) ?
-                            (
-                                <>
-                                    <div className="text-left w-full">「</div>
-                                    {
-                                        intro && intro.map((i,key) => {
-                                            return  <p className="mt-2 text-slate-500 indent-8" key={key}>{i}</p>;
-                                        })
-                                    }
-                                    <div className="text-right w-full">」</div>
-                                </>
-                            ) : null
-                        }
-                    </div>
                     <div className="p-4 hidden md:block">
                         <div className="title text-xl font-medium">
                             簡介
@@ -221,6 +151,7 @@ export default function RaceDetail(props){
                 </div>
             </div>
             {
+                    /*
                 (
                     (Object.keys(setSubraceList()).length > 0) ?
                     (
@@ -229,7 +160,9 @@ export default function RaceDetail(props){
                         </div>
                     ) : null
                 )
+                    */
             }
+            {/*
             <div className="class-detail mt-6">
                 <div className="p-4">
                     <div className="text-2xl">種族特性</div>
@@ -237,15 +170,16 @@ export default function RaceDetail(props){
                 <div className="p-4">
                     <div className="card border bg-base-100 shadow-xl">
                         <Racebaisc basic={setRaceBasic()} />
-                        {/* -- 分隔線 -- */}
+                        {/* -- 分隔線 -- /}
                         <div className="px-4 md:px-8">
                             <div className="border-y border-y-gray"></div>
                         </div>
-                        {/* -- 分隔線 -- */}
+                        {/* -- 分隔線 -- /}
                         <Racefeatures featureList={featureList} />
                     </div>
                 </div>
             </div>
+            */}
         </>
     )
 }

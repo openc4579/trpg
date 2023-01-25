@@ -1,25 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import icons from '../icons/classIcons.js'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 import './searchbox.scss'
 
 export default function SearchBox(props) {
+    const navigate = useNavigate()
+
     const [isOpenSearchBox, setIsOpenSearchBox] = useState(false)
     const isDetail = (typeof props.detail !== 'undefined') ? props.detail : false
     const isDisplayGrid = (typeof props.fixed_display_grid !== 'undefined') ? props.fixed_display_grid : false
 
     const [filterlist, setFilterlist] = useState([])
+    const displayList = (typeof props.display_lists !== 'undefined') ? props.display_lists : []
+
+    const [filterDisplayList, setFilterDisplayList] = useState([])
 
     function _checkSearchBoxOpen(e){
         let isChecked = e.target.checked;
         setIsOpenSearchBox(isChecked);
     }
 
-    function selectRace(e){
-        let html = e.target.getAttribute('data-html');
-        console.log('We need to get the details for ' + html);
+    function control_filterDisplayList(){
+        let temp_list = []
+        setFilterDisplayList(displayList)
     }
+
+    function selectResult(e){
+        let html = e.target.getAttribute('data-html');
+        navigate(html, { replace: true });
+        setIsOpenSearchBox(false)
+    }
+
+    useEffect(() => {
+        control_filterDisplayList()
+        return () => {
+            setFilterlist([])
+        };
+    }, [props]);
 
     return(
         <div className="searchbox">
@@ -56,67 +74,94 @@ export default function SearchBox(props) {
                                 <div className="my-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     選項：
                                     {
-                                       filterlist && filterlist.map((filter_item, i)=>(
-                                            <span key={i} className="text-sm font-semibold inline-block py-1 px-2 my-2 uppercase rounded-full text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">
-                                                {filter_item}
+                                        (filterlist.length > 0) ? (
+                                            filterlist.map((filter_item, i)=>(
+                                                <span key={i} className="text-sm font-bold inline-block py-1 px-2 my-2 uppercase rounded-full text-blue-800 bg-blue-100 uppercase last:mr-0 mr-1">
+                                                    {filter_item}
+                                                </span>
+                                           )) 
+                                        ) : (
+                                            <span className="text-sm font-bold inline-block py-1 px-2 my-2 uppercase rounded-full text-blue-800 bg-blue-100 uppercase last:mr-0 mr-1">
+                                                全部
                                             </span>
-                                       )) 
+                                        )
                                     }
                                 </div>
                                 {/* -- end of filter list bar -- */}
                                 {/* -- start of result list -- */}
-                                <div className="flex flex-col">
-                                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                                            <div className="overflow-hidden">
-                                                <table className="min-w-full">
-                                                    <thead className="bg-white border-b">
-                                                        <tr>
-                                                            <th scope="col" className="text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
-                                                                種族
-                                                            </th>
-                                                            <th scope="col" className="text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
-                                                                亞種
-                                                            </th>
-                                                            <th scope="col" className="text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
-                                                                速度
-                                                            </th>
-                                                            <th scope="col" className="text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
-                                                                黑暗視覺
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 cursor-pointer" onClick={selectRace}>
-                                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" data-html="something">
-                                                                Mark
-                                                            </td>
-                                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" data-html="something">
-                                                                Mark
-                                                            </td>
-                                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" data-html="something">
-                                                                Otto
-                                                            </td>
-                                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" data-html="something">
-                                                                @mdo
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                <div className="table-wrp block max-h-96 overflow-auto">
+                                    {
+                                        (filterDisplayList.length > 0) ? (   
+                                            <table className="w-full">
+                                                <thead className="bg-white sticky border-b top-0">
+                                                    <tr>
+                                                        <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
+                                                            種族
+                                                        </th>
+                                                        <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
+                                                            亞種
+                                                        </th>
+                                                        <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
+                                                            速度
+                                                        </th>
+                                                        <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
+                                                            黑暗視覺
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="h-96 overflow-scroll">
+                                                    {
+                                                        filterDisplayList && filterDisplayList.map((list_item)=>{
+                                                            let url_string = props.path_root + '/' + list_item.key
+                                                            url_string += (list_item.subrace != '') ? '/' + list_item.subrace : ''
+                                                            return (
+                                                                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 cursor-pointer" onClick={selectResult}>
+                                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
+                                                                        {list_item.name}
+                                                                    </td>
+                                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
+                                                                        {
+                                                                            (!!list_item.subrace_name) ? (
+                                                                                list_item.subrace_name
+                                                                            ) : "--"
+                                                                        }
+                                                                    </td>
+                                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
+                                                                        {
+                                                                            (!!list_item.speed.walk) ? (
+                                                                                list_item.speed.walk
+                                                                            ) : "--"
+                                                                        }
+                                                                    </td>
+                                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
+                                                                        {
+                                                                            (!!list_item.darkvision) ? (
+                                                                                list_item.darkvision
+                                                                            ) : "--"}
+                                                                    </td>
+                                                                </tr>
+                                                            )
+                                                        })
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        ) : (
+                                            <div className="min-w-full text-center">
+                                                沒有符合要求的項目
                                             </div>
-                                        </div>
-                                    </div>
+                                        )
+                                    }
                                 </div>
                                 {/* -- end of result list -- */}
                             </>
                         ) : (
                             <>
                                 {/* -- start of grid result -- */}
-                                <div className="my-4 grid gap-4 grid-cols-2 md:grid-cols-6">
+                                <div className="my-4 grid gap-8 grid-cols-2 md:grid-cols-4">
                                     {
-                                        props.display_lists && props.display_lists.map((list) => {
+                                        displayList && displayList.map((list) => {
                                             return(
-                                                <div key={list.key} className="grid">
+                                                <div key={list.key} className="grid" onClick={_checkSearchBoxOpen} checked={false}>
                                                     <Link to={props.path_root+"/"+list.key} className="text-2xl w-full">
                                                         <div className="alert shadow-lg">
                                                                 {

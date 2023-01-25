@@ -1,6 +1,6 @@
-import './racebaisc.scss'
+import './backgroundbaisc.scss'
 
-export default function Racebaisc(props){
+export default function Backgroundbaisc(props){
 console.log(props)
 
     return(

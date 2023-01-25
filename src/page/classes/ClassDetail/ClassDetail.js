@@ -4,6 +4,7 @@ import Featurelist from '../../../component/featurelist/Featurelist'
 import Classbasic from './Classbaisc'
 import Subclasslist from './Subclasslist'
 import { ClassBasicLevelsTable } from './ClassBasicLevelsTable'
+import classIcons from '../../../component/icons/classIcons.js'
 
 import {getClasses} from '../../../helper/controller';
 
@@ -144,7 +145,10 @@ export default function ClassDetail(props){
     return(
         <>
             <div className="p-8">
-                <div className="text-3xl">{className}</div>
+                <div className="text-3xl">
+                    <span className="float-left mr-4"><img fill="none" className="stroke-current flex-shrink-0 w-8 h-8" src={classIcons[currentClass+'Icon']} alt={currentClass}/></span>
+                    {className}
+                </div>
             </div>
             <div className="mx-auto bg-white border rounded-xl shadow-md overflow-hidden">
                 <div className="md:shrink-0 p-4 md:float-left">

@@ -16,7 +16,7 @@ class Navbar extends Component{
                     </label>
                 </div>
                 <div className="navbar-start">
-                    <Link to="/" className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                    <Link to="/" className="btn btn-ghost normal-case text-xl">月影暗湧</Link>
                 </div>
                 <div className="flex-none hidden lg:block">
                     <ul className="menu menu-horizontal bg-primary-content">

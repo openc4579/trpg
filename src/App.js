@@ -19,8 +19,8 @@ export default function App(props){
                 text: '職業',
                 link: '/class',
             }, {
-                text: 'Author-3',
-                link: 'https://github.com/Lakston',
+                text: '背景',
+                link: '/background',
             }]
         }, {
             text: 'Github page',
