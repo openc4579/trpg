@@ -91,6 +91,17 @@ export default function BackgroundDetail(props){
     }
     */
 
+    function setBackgroundBasic(){
+        let temp_basic = {}
+
+        temp_basic.skill = skill
+        temp_basic.language = language
+        temp_basic.tool = tool
+        temp_basic.item = item
+
+        return temp_basic
+    }
+
     async function getBackgroundData(current_race) {
         const backgroundData = await getBackground(current_race);
 
@@ -117,11 +128,6 @@ export default function BackgroundDetail(props){
                 <div className="text-3xl">{backgroundName}</div>
             </div>
             <div className="mx-auto bg-white border rounded-xl shadow-md overflow-hidden">
-                <div className="md:shrink-0 p-4 md:float-left">
-                    {/*
-                    <img className="w-full object-cover" src={thumbnails[currentRace+'Thumbnail']} alt="Modern building architecture"/>
-                    */}
-                </div>
                 <div className="p-4">
                     <div className="p-4 hidden md:block">
                         <div className="title text-xl font-medium">
@@ -151,35 +157,25 @@ export default function BackgroundDetail(props){
                 </div>
             </div>
             {
-                    /*
-                (
-                    (Object.keys(setSubraceList()).length > 0) ?
-                    (
-                        <div className="race-subrace-description mt-6 p-4">
-                            <Subracelist subcraces={setSubraceList()} onClick={updateActiveSubrace} activeSubrace={activeSubrace}/>
-                        </div>
-                    ) : null
-                )
-                    */
-            }
-            {/*
             <div className="class-detail mt-6">
                 <div className="p-4">
-                    <div className="text-2xl">種族特性</div>
+                    <div className="text-2xl">背景特性</div>
                 </div>
                 <div className="p-4">
                     <div className="card border bg-base-100 shadow-xl">
-                        <Racebaisc basic={setRaceBasic()} />
-                        {/* -- 分隔線 -- /}
+                        <Backgroundbaisc basic={setBackgroundBasic()} />
+                        {/* -- 分隔線 -- */}
                         <div className="px-4 md:px-8">
                             <div className="border-y border-y-gray"></div>
                         </div>
-                        {/* -- 分隔線 -- /}
+                        {/* -- 分隔線 -- */}
+                        {/*
                         <Racefeatures featureList={featureList} />
+                        */}
                     </div>
                 </div>
             </div>
-            */}
+            }
         </>
     )
 }
