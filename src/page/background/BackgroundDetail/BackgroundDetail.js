@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Backgroundbaisc from './Backgroundbaisc.js';
+import Backgroundfeatures from './Backgroundfeatures.js';
 
 import {getBackground} from '../../../helper/controller';
 
@@ -14,82 +15,27 @@ export default function BackgroundDetail(props){
     const [language, setLanguage] = useState({});
     const [tool, setTool] = useState({});
     const [item, setItem] = useState([]);
-    const [feature, setFeature] = useState({});
+    const [feats, setFeats] = useState([]);
 
-    /*
-    function setRaceBasic(){
-        const temp_basics = {}
-        const basic_keys = Object.keys(basic)
-        const subrace_keys = Object.keys(subraces)
+    const [featurelist, setFeatureList] = useState([]);
 
-        if(basic_keys.length > 0){
-            basic_keys.map((basic_key)=>{
-                if(typeof temp_basics[basic_key] === 'undefined') temp_basics[basic_key] = {}
-                if(basic_key !== 'prof') {
-                    temp_basics[basic_key]['default'] = basic[basic_key]
-                } else {
-                    Object.keys(basic[basic_key]).map((prof_type)=>{
-                        if(typeof temp_basics[basic_key][prof_type] === 'undefined') temp_basics[basic_key][prof_type] = {}
-                        temp_basics[basic_key][prof_type]['default'] = basic[basic_key][prof_type]
-                    })
-                }
-            })
-        }
+    function getFeatureList(features){
+        const temp_features = []
+        const default_feature_keys = Object.keys(features)
 
-        if(subrace_keys.length > 0){
+        default_feature_keys && default_feature_keys.map((level)=>{
+            const featureitems = features[level]['featureitems'] ? features[level]['featureitems'] : [];
+            if(featureitems.length > 0){
+                temp_features[level] = []
+                temp_features[level]['featureitems'] = [];
 
-            subrace_keys && subrace_keys.map(function(subrace){
-                if(subrace == activeSubrace){
-                    const subrace_item = subraces[subrace]
-                    const subrace_basic = subrace_item.basic
-                    const subrace_basic_keys = Object.keys(subrace_basic)
-    
-                    if(subrace_basic_keys.length > 0){
-                        subrace_basic_keys.map((subrace_basic_key)=>{
-                            if(typeof temp_basics[subrace_basic_key] === 'undefined') temp_basics[subrace_basic_key] = {}
-                            if(subrace_basic_key !== 'prof') {
-                                temp_basics[subrace_basic_key]['subrace'] = subrace_basic[subrace_basic_key]
-                            } else {
-                                Object.keys(subrace_basic[subrace_basic_key]).map((prof_type)=>{
-                                    if(typeof temp_basics[subrace_basic_key][prof_type] === 'undefined') temp_basics[subrace_basic_key][prof_type] = {}
-                                    temp_basics[subrace_basic_key][prof_type]['subrace'] = subrace_basic[subrace_basic_key][prof_type]
-                                })
-                            }
-                        })
-                    }
-                }
-            })
-        }
-        return temp_basics
-    }
-
-    function setSubraceList(){
-        const temp_subraces = []
-        const subrace_keys = Object.keys(subraces)
-
-        if(subrace_keys.length > 0){
-
-            subrace_keys && subrace_keys.map(function(subrace){
-                const temp_subrace={}
-                const subrace_item = subraces[subrace]
-                const subrace_title = subrace_item.title
-                temp_subrace.subrace = subrace
-                temp_subrace.subrace_title = subrace_title
-                temp_subrace.subrace_description = subrace_item.description
-
-                subrace_item.features && subrace_item.features.map(function(subrace_features){
-                    subrace_features.featureitems.map(function(featureitem){
-                        featureitem.subrace = subrace
-                        featureitem.subrace_title = subrace_title
-                    })
+                featureitems.map((featureitem)=>{
+                    temp_features[level]['featureitems'].push(featureitem);
                 })
-
-                temp_subraces.push(temp_subrace)
-            })
-        }
-        return temp_subraces
+            }
+        })
+        setFeatureList(temp_features)
     }
-    */
 
     function setBackgroundBasic(){
         let temp_basic = {}
@@ -98,12 +44,15 @@ export default function BackgroundDetail(props){
         temp_basic.language = language
         temp_basic.tool = tool
         temp_basic.item = item
+        temp_basic.feats = feats
 
         return temp_basic
     }
 
-    async function getBackgroundData(current_race) {
-        const backgroundData = await getBackground(current_race);
+    async function getBackgroundData(current_background) {
+        const backgroundData = await getBackground(current_background);
+
+        console.log(backgroundData.feature)
 
         if(typeof backgroundData.name !== 'undefined') setBackgroundName(backgroundData.name)
         if(typeof backgroundData.description !== 'undefined') setDesc(backgroundData.description)
@@ -111,7 +60,10 @@ export default function BackgroundDetail(props){
         if(typeof backgroundData.language !== 'undefined') setLanguage(backgroundData.language)
         if(typeof backgroundData.tool !== 'undefined') setTool(backgroundData.tool)
         if(typeof backgroundData.item !== 'undefined') setItem(backgroundData.item)
-        if(typeof backgroundData.feature !== 'undefined') setFeature(backgroundData.feature)
+        if(typeof backgroundData.feats !== 'undefined') setFeats(backgroundData.feats)
+        if(typeof backgroundData.features !== 'undefined') {
+            getFeatureList(backgroundData.features)
+        }
     }
 
     useEffect(() => {
@@ -161,18 +113,14 @@ export default function BackgroundDetail(props){
                 <div className="p-4">
                     <div className="text-2xl">背景特性</div>
                 </div>
-                <div className="p-4">
-                    <div className="card border bg-base-100 shadow-xl">
-                        <Backgroundbaisc basic={setBackgroundBasic()} />
-                        {/* -- 分隔線 -- */}
-                        <div className="px-4 md:px-8">
-                            <div className="border-y border-y-gray"></div>
-                        </div>
-                        {/* -- 分隔線 -- */}
-                        {/*
-                        <Racefeatures featureList={featureList} />
-                        */}
+                <div className="card border bg-base-100 shadow-xl">
+                    <Backgroundbaisc basic={setBackgroundBasic()} />
+                    {/* -- 分隔線 -- */}
+                    <div className="px-4 md:px-8">
+                        <div className="border-y border-y-gray"></div>
                     </div>
+                    {/* -- 分隔線 -- */}
+                    <Backgroundfeatures featureList={featurelist} />
                 </div>
             </div>
             }

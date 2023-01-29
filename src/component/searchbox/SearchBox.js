@@ -10,11 +10,12 @@ export default function SearchBox(props) {
     const [isOpenSearchBox, setIsOpenSearchBox] = useState(false)
     const isDetail = (typeof props.detail !== 'undefined') ? props.detail : false
     const isDisplayGrid = (typeof props.fixed_display_grid !== 'undefined') ? props.fixed_display_grid : false
-
-    const [filterlist, setFilterlist] = useState([])
     const displayList = (typeof props.display_lists !== 'undefined') ? props.display_lists : []
 
+    const [filterlist, setFilterlist] = useState([])
     const [filterDisplayList, setFilterDisplayList] = useState([])
+    const [default_search_column, setDefaultSearchCol] = useState({})
+    const [filterSearchCol, setFilterSearchCol] = useState({})
 
     function _checkSearchBoxOpen(e){
         let isChecked = e.target.checked;
@@ -26,14 +27,39 @@ export default function SearchBox(props) {
         setFilterDisplayList(displayList)
     }
 
+    function control_filterDefaultColumn(){
+        setDefaultSearchCol(props.default_search_column)
+    }
+
     function selectResult(e){
         let html = e.target.getAttribute('data-html');
         navigate(html, { replace: true });
         setIsOpenSearchBox(false)
     }
 
+    function control_filterSearchColumn(){
+        const default_search_column_keys = Object.keys(default_search_column)
+
+        let temp = {}
+        if(default_search_column_keys.length > 0){
+            default_search_column_keys.map((key)=>{
+                temp[key] = default_search_column[key]
+            })
+        }
+        console.log(temp)
+        setFilterSearchCol(temp)
+    }
+
+    useEffect(() => {
+        control_filterSearchColumn()
+        return () => {
+            setFilterSearchCol({})
+        };
+    }, [default_search_column]);
+
     useEffect(() => {
         control_filterDisplayList()
+        control_filterDefaultColumn()
         return () => {
             setFilterlist([])
         };
@@ -91,54 +117,37 @@ export default function SearchBox(props) {
                                 {/* -- start of result list -- */}
                                 <div className="table-wrp block max-h-96 overflow-auto">
                                     {
-                                        (filterDisplayList.length > 0) ? (   
+                                        (filterDisplayList.length > 0 && Object.keys(filterSearchCol).length > 0) ? (   
                                             <table className="w-full">
                                                 <thead className="bg-white sticky border-b top-0">
                                                     <tr>
-                                                        <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
-                                                            種族
-                                                        </th>
-                                                        <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
-                                                            亞種
-                                                        </th>
-                                                        <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
-                                                            速度
-                                                        </th>
-                                                        <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
-                                                            黑暗視覺
-                                                        </th>
+                                                        {
+                                                            Object.keys(filterSearchCol).map((key)=>(
+                                                                <th scope="col" className="truncate text-sm font-bold text-gray-900 px-6 py-4 text-left bg-blue-100">
+                                                                    {filterSearchCol[key]}
+                                                                </th>
+                                                            ))
+                                                        }
                                                     </tr>
                                                 </thead>
-                                                <tbody className="h-96 overflow-scroll">
+                                                <tbody className="max-h-96 overflow-scroll">
                                                     {
                                                         filterDisplayList && filterDisplayList.map((list_item)=>{
                                                             let url_string = props.path_root + '/' + list_item.key
-                                                            url_string += (list_item.subrace != '') ? '/' + list_item.subrace : ''
+                                                            url_string += (!!list_item.subrace) ? '/' + list_item.subrace : ''
                                                             return (
                                                                 <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 cursor-pointer" onClick={selectResult}>
-                                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
-                                                                        {list_item.name}
-                                                                    </td>
-                                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
-                                                                        {
-                                                                            (!!list_item.subrace_name) ? (
-                                                                                list_item.subrace_name
-                                                                            ) : "--"
-                                                                        }
-                                                                    </td>
-                                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
-                                                                        {
-                                                                            (!!list_item.speed.walk) ? (
-                                                                                list_item.speed.walk
-                                                                            ) : "--"
-                                                                        }
-                                                                    </td>
-                                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
-                                                                        {
-                                                                            (!!list_item.darkvision) ? (
-                                                                                list_item.darkvision
-                                                                            ) : "--"}
-                                                                    </td>
+                                                                    {
+                                                                        Object.keys(filterSearchCol).map((key)=>(
+                                                                            <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap" data-html={url_string}>
+                                                                                {
+                                                                                    (!!list_item[key]) ? (
+                                                                                        list_item[key]
+                                                                                    ) : "--"
+                                                                                }
+                                                                            </td>
+                                                                        ))
+                                                                    }
                                                                 </tr>
                                                             )
                                                         })

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Racefeatureitem from '../../../component/racefeature/Racefeatureitem'
+import Featureitem from '../../../component/feature/Featureitem';
 
-export default function Racefeatures(props){
+export default function Backgroundfeatures(props){
     const [featureList, setFeatureList] = useState([]);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export default function Racefeatures(props){
             {
                 featureList && featureList.map((featureList_group)=>(
                     featureList_group.featureitems.map((featureitem) => {
-                        return <Racefeatureitem featureitem={featureitem}/>
+                        return <Featureitem featureitem={featureitem}/>
                     })
                 ))
             }

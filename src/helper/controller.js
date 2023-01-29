@@ -86,6 +86,20 @@ export function getClasses(class_str){
         .catch(err => console.log(err));
 }
 
+export function getBackgroundList(){
+    const bodyParam = {
+        'type': 'backgroundlist'
+    };
+
+    return axios.get("get_background_data.php", {params:bodyParam})
+        .then(response => {
+            if (response.status === 200){
+                return response.data;
+            }
+        })
+        .catch(err => console.log(err));
+}
+
 export function getBackground(background_str){
     const bodyParam = {
         'type': 'background',

@@ -8,11 +8,11 @@ import {getRacesList} from '../../helper/controller';
 export default function Races(){
     const param_race = useParams()
 
-    console.log(param_race)
-
     const [currentRace, setCurrentRace] = useState('')
     const [currentSubrace, setCurrentSubrace] = useState('')
     const [raceList, setRaceList] = useState([])
+
+    const default_search_column = {'name': '種族', 'subrace_name': '亞種', 'size_type': '體型', 'darkvision': '黑暗視覺'}
 
     async function getRacesListData() {
         const raceData = await getRacesList();
@@ -34,7 +34,7 @@ export default function Races(){
             <div className="p-8">
                 <div className="text-4xl">種族</div>
             </div>
-            <SerachBox search_title="種族列表" display_lists={raceList} has_icon={false} path_root="/race" detail={(currentRace != '') ? false : true}/>
+            <SerachBox search_title="種族列表" display_lists={raceList} has_icon={false} path_root="/race" detail={(currentRace != '') ? false : true} default_search_column={default_search_column}/>
             {
                 (currentRace != '') ?
                 (

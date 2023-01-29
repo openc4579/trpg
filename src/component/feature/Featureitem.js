@@ -1,10 +1,10 @@
-import { useEffect } from "react"
+import React from "react"
 
-import './racefeatureitem.scss';
+import './featureitem.scss';
 
-export default function Racefeatureitem(props){
+export default function Featureitem(props){
     return(
-        <div className="race-feature-item px-2 py-4 md:p-4">
+        <div className="race-feature-item px-2 py-4 md:p-4 bg-gray-100">
             <div className="text-xl font-bold mb-2 inline-block align-middle">
                 {
                     (typeof props.featureitem.subrace_title === "undefined" || props.featureitem.subrace_title === '') ? (
