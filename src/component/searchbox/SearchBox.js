@@ -38,16 +38,17 @@ export default function SearchBox(props) {
     }
 
     function control_filterSearchColumn(){
-        const default_search_column_keys = Object.keys(default_search_column)
-
-        let temp = {}
-        if(default_search_column_keys.length > 0){
-            default_search_column_keys.map((key)=>{
-                temp[key] = default_search_column[key]
-            })
+        if(!!default_search_column){
+            const default_search_column_keys = Object.keys(default_search_column)
+    
+            let temp = {}
+            if(default_search_column_keys.length > 0){
+                default_search_column_keys.map((key)=>{
+                    temp[key] = default_search_column[key]
+                })
+            }
+            setFilterSearchCol(temp)
         }
-        console.log(temp)
-        setFilterSearchCol(temp)
     }
 
     useEffect(() => {

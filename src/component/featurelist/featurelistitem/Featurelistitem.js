@@ -1,4 +1,5 @@
 import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import Text from '../../text/Text';
 
 import FeaturelistIcon from './FeaturelistIcon'
 
@@ -28,7 +29,11 @@ export default function Featurelistitem(props){
                         <div>
                             {
                                 featureitemdetail.description && featureitemdetail.description.map((i,key) => {
-                                    return <div key={key} className={"text-lg" + ((key !== (featureitemdetail.description.length - 1)) ? " mb-6" : '')}>{i}</div>;
+                                    return(
+                                        <div key={key} className={"text-lg" + ((key !== (featureitemdetail.description.length - 1)) ? " mb-6" : '')}>
+                                            <Text text={i} />
+                                        </div>
+                                    )
                                 })
                             }
                         </div>
