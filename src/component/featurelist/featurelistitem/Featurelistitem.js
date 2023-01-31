@@ -56,7 +56,11 @@ export default function Featurelistitem(props){
                                                             <div>
                                                                 {
                                                                     sublistitem.subdesc && sublistitem.subdesc.map((i,key) => {
-                                                                        return <div key={key} className="text-lg">{i}</div>;
+                                                                        return(
+                                                                            <div key={key} className="text-lg">
+                                                                                <Text text={i} />
+                                                                            </div>
+                                                                        )
                                                                     })
                                                                 }
                                                             </div>

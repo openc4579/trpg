@@ -1,48 +1,72 @@
 import React, {useState, useEffect} from 'react'
+import HTMLString from 'react-html-string'
 
 export default function Text(props){
-    const [textlist, setTestlist] = useState([]);
+    const [htmltext, setHTMLtext] = useState('');
 
     function control_regex(text){
         const regex_str = /\{@(.*?)\}/g
-        let m
+        var mark_prefix = '@#';
+        var mark_suffix = '#@';
+
+        let m = [...text.matchAll(regex_str)]
         let temp_list = []
-        do {
-            m = regex_str.exec(text);
-            if (m) {
-                let code_list = m[1].split(';');
-                let type = ''
-                let item = []
-                let name = ''
+
+        if(m.length > 0){
+            m.forEach(function (match_detail, key) {
+                let code_list = match_detail[1].split('|');
+                var type = ''
+                var item = []
+                var name = ''
                 if(code_list.length == 3){
                     type = code_list[0]
-                    item = code_list[1].split('|')
+                    item = code_list[1].split('-')
                     name = code_list[2]
                 }
 
                 let object = {'type': type, 'item': item, 'name': name}
+                temp_list[key] = object
 
-                temp_list.push(object)
+                var edited_item = mark_prefix + key + mark_suffix;
+                text = text.replace(match_detail[0], edited_item);
+            });
 
-                text.replace(m[0], '')
-            }
-        } while (m);
-        console.log(temp_list)
+            console.log(temp_list)
+        }
+
+        if(temp_list.length > 0){
+            temp_list.forEach(function(obj, key){
+                var type = obj.type
+                var item = obj.item
+                var name = obj.name
+
+                var str = ''
+
+                switch(type){
+                    case 'link':
+                        str += '<a className="link link-primary" target="_blank" href="'+item.join('/')+'">'
+                        str += name
+                        str += '</a>'
+                        break
+                    default:
+                        str += name
+                }
+                var edited_item = mark_prefix + key + mark_suffix;
+                text = text.replace(edited_item, str);
+            })
+        }
+
+        setHTMLtext(text)
     }
 
     useEffect(() => {
-        setTestlist(props.text)
         control_regex(props.text)
         return () => {
-            setTestlist([])
+            setHTMLtext([])
         };
     }, [props]);
 
     return(
-        <>
-            {
-                textlist
-            }
-        </>
+        <HTMLString html={htmltext} />
     )
 }
