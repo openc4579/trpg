@@ -54,6 +54,7 @@ export default function Classbasic(props){
                                                 </>
                                             )
                                         case 'start_equipment':
+                                            console.log(item)
                                             return (
                                                 <>
                                                     <tr className="text-lg">
@@ -70,7 +71,9 @@ export default function Classbasic(props){
                                                                         <li className="py-2" key={i}>
                                                                             <div className="text-lg">
                                                                                 {
-                                                                                    (typeof choice_group.b !== 'undefined') ? ('(a)'+choice_group.a+' 或 (b)'+choice_group.b) : choice_group.a
+                                                                                    choice_group.map((choice_item, j)=>(
+                                                                                        ((j != 0) ? '、或':'') + '('+(j+1)+')'+choice_item
+                                                                                    ))
                                                                                 }
                                                                             </div>
                                                                         </li>
