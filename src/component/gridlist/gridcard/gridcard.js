@@ -28,45 +28,47 @@ export default function Gridcard(props){
         <>
             {
                 (item != '' && category != '') ? (
-                    <div className="card card-side bg-base-100 shadow-xl">
-                        <div className="card-body w-[60%]">
-                            <h2 className="card-title">
-                                {
-                                    (category == 'class') ? (
-                                        <img fill="none" className="stroke-current flex-shrink-0 w-6 h-6" src={classicons[item+'Icon']} alt={item + 'Icon'}/>
-                                    ) : null
-                                }
-                                {title}
-                            </h2>
-                            <p className="text-slate-500 indent-8 line-clamp-4">{text}</p>
-                            <div className="card-actions justify-end">
-                                <Link to={'/'+category+'/'+item} className="btn btn-primary">詳細</Link>
+                    <Link to={'/'+category+'/'+item}>
+                        <div className="card card-side bg-base-100 shadow-xl">
+                            <div className="card-body w-[60%]">
+                                <h2 className="card-title">
+                                    {
+                                        (category == 'class') ? (
+                                            <img fill="none" className="stroke-current flex-shrink-0 w-6 h-6" src={classicons[item+'Icon']} alt={item + 'Icon'}/>
+                                        ) : null
+                                    }
+                                    {title}
+                                </h2>
+                                <p className="text-slate-500 indent-8 line-clamp-4">{text}</p>
+                                <div className="card-actions justify-start">
+                                    <Link to={'/'+category+'/'+item} className="btn btn-primary">詳細</Link>
+                                </div>
                             </div>
-                        </div>
-                        <figure className="w-[40%]">
-                            {
-                                (()=>{
-                                    let image_src = ''
-                                    switch(category){
-                                        case "class":
-                                            image_src = classthumbnails[item + 'Thumbnail']
-                                            break
-                                        case "race":
-                                            image_src = racethumbnails[item + 'Thumbnail']
-                                            break
-                                        default:
-                                            image_src = ''
-                                    }
+                            <figure className="max-w-[40%] h-64 p-3">
+                                {
+                                    (()=>{
+                                        let image_src = ''
+                                        switch(category){
+                                            case "class":
+                                                image_src = classthumbnails[item + 'Thumbnail']
+                                                break
+                                            case "race":
+                                                image_src = racethumbnails[item + 'Thumbnail']
+                                                break
+                                            default:
+                                                image_src = ''
+                                        }
 
-                                    if(image_src !== ''){
-                                        return(
-                                            <img src={image_src} alt={item + 'Thumbnail'}/>
-                                        )
-                                    }
-                                })()
-                            }
-                        </figure>
-                    </div>
+                                        if(image_src !== ''){
+                                            return(
+                                                <img className="max-w-[100%] max-h-[100%]" src={image_src} alt={item + 'Thumbnail'}/>
+                                            )
+                                        }
+                                    })()
+                                }
+                            </figure>
+                        </div>
+                    </Link>
                 ) : null
             }
         </>

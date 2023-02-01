@@ -7,6 +7,7 @@ import fighterThumbnail from '../../asset/images/classes/thumbnails/fighter.png'
 import monkThumbnail from '../../asset/images/classes/thumbnails/monk.png'
 import paladinThumbnail from '../../asset/images/classes/thumbnails/paladin.png'
 import rangerThumbnail from '../../asset/images/classes/thumbnails/ranger.png'
+import rogueThumbnail from '../../asset/images/classes/thumbnails/rogue.png'
 import sorcererThumbnail from '../../asset/images/classes/thumbnails/sorcerer.png'
 import warlockThumbnail from '../../asset/images/classes/thumbnails/warlock.png'
 import wizardThumbnail from '../../asset/images/classes/thumbnails/wizard.png'
@@ -21,6 +22,7 @@ export default {
     monkThumbnail,
     paladinThumbnail,
     rangerThumbnail,
+    rogueThumbnail,
     sorcererThumbnail,
     artificerThumbnail,
     warlockThumbnail,

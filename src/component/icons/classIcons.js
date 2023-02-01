@@ -7,6 +7,7 @@ import fighterIcon from '../../asset/images/classes/icons/Fighter.svg'
 import monkIcon from '../../asset/images/classes/icons/Monk.svg'
 import paladinIcon from '../../asset/images/classes/icons/Paladin.svg'
 import rangerIcon from '../../asset/images/classes/icons/Ranger.svg'
+import rogueIcon from '../../asset/images/classes/icons/Rogue.svg'
 import sorcererIcon from '../../asset/images/classes/icons/Sorcerer.svg'
 import warlockIcon from '../../asset/images/classes/icons/Warlock.svg'
 import wizardIcon from '../../asset/images/classes/icons/Wizard.svg'
@@ -21,6 +22,7 @@ export default {
     monkIcon,
     paladinIcon,
     rangerIcon,
+    rogueIcon,
     sorcererIcon,
     artificerIcon,
     warlockIcon,
