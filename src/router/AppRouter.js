@@ -10,7 +10,8 @@ import Races from '../page/races/Races'
 import Racesindex from '../page/races/Racesindex'
 
 import Background from '../page/background/Background'
-import Backgroundindex from '../page/background/Backgroundindex'
+
+import Feat from '../page/feat/Feat'
 
 export default function AppRouter(props){
     return(
@@ -28,8 +29,12 @@ export default function AppRouter(props){
                 </Route>
             </Route>
             <Route path="/background">
-                <Route index element={<Backgroundindex />} />
+                <Route index element={<Background />} />
                 <Route path=":background" element={<Background />} />
+            </Route>
+            <Route path="/feat">
+                <Route index element={<Feat />} />
+                <Route path=":feat" element={<Feat />} />
             </Route>
         </Routes>
     )

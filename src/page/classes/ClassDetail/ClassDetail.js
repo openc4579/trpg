@@ -152,7 +152,9 @@ export default function ClassDetail(props){
             </div>
             <div className="mx-auto bg-white border rounded-xl shadow-md overflow-hidden">
                 <div className="md:shrink-0 p-4 md:float-left">
-                    <img className="w-full object-cover" src={thumbnails[currentClass+'Thumbnail']} alt="Modern building architecture"/>
+                    <figure className="max-h-64 p-3">
+                        <img className="w-full h-full object-cover overflow-hidden opacity-20" src={thumbnails[currentClass+'Thumbnail']} alt="Modern building architecture"/>
+                    </figure>
                 </div>
                 <div className="p-4">
                     <div className="md:text-xl italic font-bold p-4">

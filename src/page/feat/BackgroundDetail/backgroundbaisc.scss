@@ -1,0 +1,30 @@
+.racebasic{
+    .racebasic-item{
+        .racebasic-item-race-item{
+            border-bottom: 3px dotted #2196f3;
+            //color: #0d5a99;
+        }
+        .racebasic-item-subrace-item{
+            border-bottom: 3px dotted #e91e63;
+            //color: #800a31;
+        }
+    }
+}
+
+.natural-spell-table{
+    .race-natural-spell-title{
+        td{
+            background-color: #aed4f3;
+        }
+    }
+    .race-natural-spell-item{
+    }
+    .subrace-natural-spell-title{
+        td{
+            background-color: #f0bbcd;
+        }
+    }
+    .subrace-natural-spell-item{
+
+    }
+}

@@ -35,6 +35,9 @@ export default function App(){
             }, {
                 text: '背景',
                 link: '/background',
+            }, {
+                text: '專長',
+                link: '/feat',
             }]
         }, {
             text: 'Github page',

@@ -80,7 +80,30 @@ export default function SearchBox(props) {
                 </div>
                 <div className={(isDetail) ? "" : "collapse-content"}>
                     {
-                        (!isDetail && !isDisplayGrid) ? (
+                        (isDisplayGrid) ? (
+                            <>
+                                {/* -- start of grid result -- */}
+                                <div className="my-4 grid gap-8 grid-cols-2 md:grid-cols-4">
+                                    {
+                                        displayList && displayList.map((list) => {
+                                            return(
+                                                <div key={list.key} className="grid" onClick={_checkSearchBoxOpen} checked={false}>
+                                                    <Link to={props.path_root+"/"+list.key} className="text-2xl w-full">
+                                                        <div className="alert shadow-lg">
+                                                                {
+                                                                    (props.has_icon) ? (<img fill="none" className="stroke-current flex-shrink-0 w-6 h-6" src={icons[list.key+'Icon']} alt={list.name}/>) : ''
+                                                                }
+                                                                <span className="mx-auto">{list.name}</span>
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                {/* -- end of grid result -- */}
+                            </>
+                        ) : (
                             <>
                                 {/* -- start of search bar -- */}
                                 <form className="flex items-center">   
@@ -163,29 +186,6 @@ export default function SearchBox(props) {
                                     }
                                 </div>
                                 {/* -- end of result list -- */}
-                            </>
-                        ) : (
-                            <>
-                                {/* -- start of grid result -- */}
-                                <div className="my-4 grid gap-8 grid-cols-2 md:grid-cols-4">
-                                    {
-                                        displayList && displayList.map((list) => {
-                                            return(
-                                                <div key={list.key} className="grid" onClick={_checkSearchBoxOpen} checked={false}>
-                                                    <Link to={props.path_root+"/"+list.key} className="text-2xl w-full">
-                                                        <div className="alert shadow-lg">
-                                                                {
-                                                                    (props.has_icon) ? (<img fill="none" className="stroke-current flex-shrink-0 w-6 h-6" src={icons[list.key+'Icon']} alt={list.name}/>) : ''
-                                                                }
-                                                                <span className="mx-auto">{list.name}</span>
-                                                        </div>
-                                                    </Link>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                                {/* -- end of grid result -- */}
                             </>
                         )
                     }
