@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import icons from '../icons/classIcons.js'
 import {Link, useNavigate} from 'react-router-dom'
 
+import PopupModel from '../popupmodel/popupmodel.js'
+
 import './searchbox.scss'
 
 export default function SearchBox(props) {
@@ -15,6 +17,7 @@ export default function SearchBox(props) {
     const [filterlist, setFilterlist] = useState([])
     const [filterDisplayList, setFilterDisplayList] = useState([])
     const [default_search_column, setDefaultSearchCol] = useState({})
+    const [default_search_filter, setDefaultSearchFilter] = useState({})
     const [filterSearchCol, setFilterSearchCol] = useState({})
 
     function _checkSearchBoxOpen(e){
@@ -29,6 +32,7 @@ export default function SearchBox(props) {
 
     function control_filterDefaultColumn(){
         setDefaultSearchCol(props.default_search_column)
+        setDefaultSearchFilter(props.default_search_filter)
     }
 
     function selectResult(e){
@@ -61,6 +65,7 @@ export default function SearchBox(props) {
     useEffect(() => {
         control_filterDisplayList()
         control_filterDefaultColumn()
+
         return () => {
             setFilterlist([])
         };
@@ -122,6 +127,11 @@ export default function SearchBox(props) {
                                 {/* -- end of search bar -- */}
                                 {/* -- start of filter list bar -- */}
                                 <div className="my-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    {
+                                        (Object.keys(default_search_filter).length > 0) ? (
+                                            <PopupModel button_text='篩選' search_filter={default_search_filter}/>
+                                        ) : null
+                                    }
                                     選項：
                                     {
                                         (filterlist.length > 0) ? (
@@ -139,7 +149,7 @@ export default function SearchBox(props) {
                                 </div>
                                 {/* -- end of filter list bar -- */}
                                 {/* -- start of result list -- */}
-                                <div className="table-wrp block max-h-96 overflow-auto">
+                                <div className={"table-wrp block overflow-auto" + ((isDetail) ? "" : " max-h-96")}>
                                     {
                                         (filterDisplayList.length > 0 && Object.keys(filterSearchCol).length > 0) ? (   
                                             <table className="w-full">

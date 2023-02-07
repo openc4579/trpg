@@ -115,6 +115,20 @@ export function getBackground(background_str){
         .catch(err => console.log(err));
 }
 
+export function getFeaFilter(){
+    const bodyParam = {
+        'type': 'featfilter'
+    };
+
+    return axios.get("get_feat_data.php", {params:bodyParam})
+        .then(response => {
+            if (response.status === 200){
+                return response.data;
+            }
+        })
+        .catch(err => console.log(err));
+}
+
 export function getFeatList(){
     const bodyParam = {
         'type': 'featlist'

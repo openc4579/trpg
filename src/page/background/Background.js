@@ -36,7 +36,7 @@ export default function Background(){
             <div className="p-8">
                 <div className="text-4xl">背景</div>
             </div>
-            <SerachBox search_title="背景範例列表" display_lists={backgroundList} has_icon={false} path_root="/background" detail={(currentBackground != '') ? false : true} fixed_display_grid={false} default_search_column={default_search_column}/>
+            <SerachBox search_title="背景範例列表" display_lists={backgroundList} path_root="/background" detail={(currentBackground != '') ? false : true} fixed_display_grid={false} default_search_column={default_search_column}/>
             {
                 (currentBackground != '') ?
                 (
