@@ -25,9 +25,71 @@ export default function SearchBox(props) {
         setIsOpenSearchBox(isChecked);
     }
 
+    function update_selected_filter(data){
+        let temp_list = {}
+        if(!!data && Object.keys(data).length > 0){
+            Object.keys(data).map((filter)=>{
+                if(data[filter] != ''){
+                    temp_list[filter] = data[filter]
+                }
+            })
+        }
+        setFilterlist(temp_list)
+    }
+
+    function _check_match_selected_list(data){
+        let isMatch = true
+        if(!!filterlist && Object.keys(filterlist).length > 0){
+            let filterlist_keys = Object.keys(filterlist);
+            for(let i=0; i<filterlist_keys.length;i++){
+                let filter = filterlist_keys[i]
+
+                let selected_val = filterlist[filter]
+                if(typeof data[filter] == 'undefined'){
+                    isMatch = false
+                    break;
+                }
+
+                switch(selected_val){
+                    case '':
+                        break;
+                    case 'Y':
+                        if(data[filter] == ''){
+                            isMatch = false
+                        }
+                        break;
+                    case 'N':
+                        if(data[filter] != ''){
+                            isMatch = false
+                        }
+                        break;
+                    default:
+                        let data_val_list = data[filter].split(',')
+                        if(!data_val_list.includes(selected_val)){
+                            isMatch = false
+                        }
+                }
+
+                if(!isMatch) break
+            }
+        }
+
+        return isMatch
+    }
+
+    console.log(filterlist)
+    console.log(default_search_filter)
+
     function control_filterDisplayList(){
         let temp_list = []
-        setFilterDisplayList(displayList)
+        if(displayList.length > 0){
+            displayList.map((data)=>{
+                if(_check_match_selected_list(data)){
+                    temp_list.push(data)
+                }
+            })
+        }
+        setFilterDisplayList(temp_list)
     }
 
     function control_filterDefaultColumn(){
@@ -54,6 +116,10 @@ export default function SearchBox(props) {
             setFilterSearchCol(temp)
         }
     }
+
+    useEffect(() => {
+        control_filterDisplayList()
+    }, [filterlist]);
 
     useEffect(() => {
         control_filterSearchColumn()
@@ -129,16 +195,24 @@ export default function SearchBox(props) {
                                 <div className="my-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     {
                                         (!!default_search_filter && Object.keys(default_search_filter).length > 0) ? (
-                                            <PopupModel button_text='篩選' search_filter={default_search_filter}/>
+                                            <PopupModel button_text='篩選' search_filter={default_search_filter} onClick={update_selected_filter} filterlist={filterlist}/>
                                         ) : null
                                     }
                                     選項：
                                     {
-                                        (filterlist.length > 0) ? (
-                                            filterlist.map((filter_item, i)=>(
-                                                <span key={i} className="text-sm font-bold inline-block py-1 px-2 my-2 uppercase rounded-full text-blue-800 bg-blue-100 uppercase last:mr-0 mr-1">
-                                                    {filter_item}
-                                                </span>
+                                        (!!filterlist && Object.keys(filterlist).length > 0) ? (
+                                            Object.keys(filterlist).map((filter_key, i)=>(
+                                                (!!default_search_filter[filter_key]) ? (
+                                                    <span key={i} className="text-sm font-bold inline-block py-1 px-2 my-2 uppercase rounded-full text-blue-800 bg-blue-100 uppercase last:mr-0 mr-1">
+                                                        {default_search_filter[filter_key]['name']} : {
+                                                            default_search_filter[filter_key]['option'].map((value_group)=>(
+                                                                (value_group.key == filterlist[filter_key]) ? (
+                                                                    value_group.name
+                                                                ) : null
+                                                            ))
+                                                        }
+                                                    </span>
+                                                ) : null
                                            )) 
                                         ) : (
                                             <span className="text-sm font-bold inline-block py-1 px-2 my-2 uppercase rounded-full text-blue-800 bg-blue-100 uppercase last:mr-0 mr-1">

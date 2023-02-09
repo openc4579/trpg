@@ -12,7 +12,7 @@ export default function Feat(){
     const [featList, setFeatList] = useState([])
     const [featFilter, setFeatFilter] = useState({})
 
-    const default_search_column = {'name': '專長', 'ability': '屬性值', 'prerequisite': '先決條件'}
+    const default_search_column = {'name': '專長', 'ability_name': '屬性值', 'prerequisite': '先決條件'}
 
     async function getFeatListData() {
         const featData = await getFeatList();
