@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 
 import SerachBox from '../../component/searchbox/SearchBox'
-import BackgroundDetail from './BackgroundDetail/BackgroundDetail';
+import FeatDetail from './FeatDetail/FeatDetail';
 
 import {getFeatList, getFeaFilter} from '../../helper/controller';
 export default function Feat(){
@@ -42,13 +42,13 @@ export default function Feat(){
     return(
         <>
             <div className="p-8">
-                <div className="text-4xl">背景</div>
+                <div className="text-4xl">專長</div>
             </div>
-            <SerachBox search_title="背景範例列表" display_lists={featList} has_icon={false} path_root="/background" detail={(currentFeat != '') ? false : true} fixed_display_grid={false} default_search_column={default_search_column} default_search_filter={featFilter}/>
+            <SerachBox search_title="專長列表" display_lists={featList} has_icon={false} path_root="/feat" detail={(currentFeat != '') ? false : true} fixed_display_grid={false} default_search_column={default_search_column} default_search_filter={featFilter}/>
             {
                 (currentFeat != '') ?
                 (
-                    <BackgroundDetail current_background={currentFeat} />
+                    <FeatDetail current_feat={currentFeat} />
                 ) : null
             }
         </>

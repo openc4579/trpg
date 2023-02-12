@@ -142,3 +142,18 @@ export function getFeatList(){
         })
         .catch(err => console.log(err));
 }
+
+export function getFeat(feat_name_str){
+    const bodyParam = {
+        'type': 'feat',
+        'id': feat_name_str
+    };
+
+    return axios.get("get_feat_data.php", {params:bodyParam})
+        .then(response => {
+            if (response.status === 200){
+                return response.data;
+            }
+        })
+        .catch(err => console.log(err));
+}

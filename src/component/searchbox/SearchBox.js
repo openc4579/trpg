@@ -77,9 +77,6 @@ export default function SearchBox(props) {
         return isMatch
     }
 
-    console.log(filterlist)
-    console.log(default_search_filter)
-
     function control_filterDisplayList(){
         let temp_list = []
         if(displayList.length > 0){
@@ -138,7 +135,7 @@ export default function SearchBox(props) {
     }, [props]);
 
     return(
-        <div className="searchbox">
+        <div className="searchbox mb-2 md:mb-4">
             <div className={(isDetail) ? "" : "collapse shadow-xl"}>
                 {
                     (isDetail) ?
