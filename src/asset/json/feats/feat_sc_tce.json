@@ -1,0 +1,490 @@
+{
+  "feat": [
+        {
+          "name": "奇械學徒",
+          "ENG_name": "Artificer Initiate",
+          "source": "TCE",
+          "page": 79,
+          "toolProficiencies": [
+            {
+              "artisan's tools": true
+            }
+          ],
+          "additionalSpells": [
+            {
+              "ability": "int",
+              "innate": {
+                "_": {
+                  "_": [
+                    {
+                      "choose": "level=0|class=Artificer"
+                    }
+                  ],
+                  "daily": {
+                    "1": [
+                      {
+                        "choose": "level=1|class=Artificer"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "entries": [
+            "你已習得些許奇械師的創造力：",
+            {
+              "type": "list",
+              "items": [
+                "你從{@filter 奇械師法術列表|spells|level=0;1|class=artificer}中選擇並習得一個戲法。此外，你從該法術列表中選擇並習得一個一環法術。智力是你施展這些法術的施法關鍵屬性。",
+                "你可以在不消耗法術位的情況下施展一次來自此專長的一環法術。你必須在完成一次長休後才能再次這樣做。你也可以正常消耗法術位來施展該法術。",
+                "你獲得你所選的一項{@filter 工匠工具|items|type=artisan's tools}熟練，並且你可以將該工具作為施展任何以智力為施法關鍵屬性的法術的法器。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "大廚",
+          "ENG_name": "Chef",
+          "source": "TCE",
+          "page": 79,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "con",
+                  "wis"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "toolProficiencies": [
+            {
+              "cook's utensils": true
+            }
+          ],
+          "entries": [
+            "花費在專研廚藝上的工夫已然有了回報，使你獲得了以下增益：",
+            {
+              "type": "list",
+              "items": [
+                "如果你還沒有獲得{@item 廚師工具|phb}的熟練項，獲得之。",
+                "作為短休的一部分，只要你手上有原料和{@item 廚師工具|phb}，你便可以烹飪特制料理。你可以為特定數量的生物準備這種食物，其數量等同於4 + 你的熟練加值。在本次短休結束時，任何食用了料理並且花費了一個或更多生命骰來恢覆生命值的生物恢覆額外{@dice 1d8}點生命值。",
+                "在花費一小時精心制作後，或者在完成一次長休時，你可以制作等同於你熟練加值個數的餐點。這些餐點在制作完成後持續八小時。任何食用餐點的生物都能獲得等同於你熟練加值的臨時生命值。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "粉碎者",
+          "ENG_name": "Crusher",
+          "source": "TCE",
+          "page": 79,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "str",
+                  "con"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "entries": [
+            "你擅長於碾碎敵人的技藝，你獲得了以下增益：",
+            {
+              "type": "list",
+              "items": [
+                "每回合一次，當你用造成鈍擊傷害的攻擊命中一個生物時，只要目標的體型並未比你大一級以上，你就可以將目標移動五尺至一個未被占據的空間。",
+                "當你用造成鈍擊傷害的攻擊命中一個生物並造成重擊時，直至你的下一回合開始，所有針對該生物的攻擊檢定具有優勢。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "魔能導師",
+          "ENG_name": "Eldritch Adept",
+          "source": "TCE",
+          "page": 79,
+          "prerequisite": [
+            {
+              "spellcasting2020": true
+            }
+          ],
+          "entries": [
+            "對神秘學的研究使你解鎖了體內的秘法能量。你從契術師職業中選擇並獲得一項{@filter 魔能祈喚|optionalfeatures|Feature Type=EI}。如果該祈喚具有任何先決條件，則僅當你是一位滿足該條件的契術師時才能選擇該祈喚。",
+            "當你升級時，你可以將該祈喚更換為契術師職業中的另一個魔能祈喚。"
+          ]
+        },
+        {
+          "name": "精類觸碰",
+          "ENG_name": "Fey Touched",
+          "source": "TCE",
+          "page": 79,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "int",
+                  "wis",
+                  "cha"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "additionalSpells": [
+            {
+              "ability": "inherit",
+              "innate": {
+                "_": {
+                  "daily": {
+                    "1e": [
+                      "misty step",
+                      {
+                        "choose": "level=1|school=E;D"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "entries": [
+            "暴露在妖精荒野的魔法之下的經歷已經改變了你，使你獲得了以下增益：",
+            {
+              "type": "list",
+              "items": [
+                "你習得{@spell 迷蹤步}以及一個由你選擇的{@filter 一環法術|spells|level=1|school=E;D}。該一環法術必須是預言系或者惑控系法術。你可以在不消耗法術位的情況下施展這些法術各一次。當你以此法施展某個法術後，你不能再次以此法施展該法術，直至你完成一次長休。你也可以消耗合適的法術位來施展這些法術。這些法術的施法關鍵屬性是你由此專長提升的屬性。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "戰鬥學徒",
+          "ENG_name": "Fighting Initiate",
+          "source": "TCE",
+          "page": 80,
+          "prerequisite": [
+            {
+              "proficiency": [
+                {
+                  "weapon": "martial"
+                }
+              ]
+            }
+          ],
+          "entries": [
+            "你的軍事訓練幫助你養成了一種特定的戰術風格。因此，你可以從戰士職業中選擇並習得一項{@filter 戰鬥風格|optionalfeatures|Feature Type=FS:F}。如果你已經有一項戰鬥風格，你不能選擇相同的戰鬥風格。",
+            "每當你升級並達到獲得屬性值提升特性的等級時，你可以來自此專長的戰鬥風格替換為戰士職業中的另一項你未習得的戰鬥風格。"
+          ]
+        },
+        {
+          "name": "槍手",
+          "ENG_name": "Gunner",
+          "source": "TCE",
+          "page": 80,
+          "ability": [
+            {
+              "dex": 1
+            }
+          ],
+          "weaponProficiencies": [
+            {
+              "firearms": true
+            }
+          ],
+          "entries": [
+            "你持槍時的手快眼明使你獲得了以下增益：",
+            {
+              "type": "list",
+              "items": [
+                "你獲得槍械的熟練項（見城主指南的\"{@variantrule Firearms|DMG}\"欄目）。",
+                "你忽略槍械的裝填屬性。",
+                "你在敵對生物５尺範圍內發動遠程攻擊檢定時，不會因此而具有劣勢。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "超魔法導師",
+          "ENG_name": "Metamagic Adept",
+          "source": "TCE",
+          "page": 80,
+          "prerequisite": [
+            {
+              "spellcasting2020": true
+            }
+          ],
+          "entries": [
+            "你習得如何往你的法術上施加你的意志，從而改變它們的功能：",
+            {
+              "type": "list",
+              "items": [
+                "你從術士職業中選擇並習得兩項{@filter 超魔法|optionalfeatures|Feature Type=MM}選項。除非特別說明，否則一個法術施展時只能應用一種超魔法選項。當你升級並達到獲得屬性值提升特性的等級時，你可以將其中一項超魔法選項替換為術士職業中的另一項超魔法選項。",
+                "你獲得2點術法點，用於施展超魔法（這些術法點和任何其他來源的術法點疊加，但只能用於超魔法）。你在完成長休後重獲所有已消耗的術法點。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "穿刺者",
+          "ENG_name": "Piercer",
+          "source": "TCE",
+          "page": 80,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "str",
+                  "dex"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "entries": [
+            "你已經可以在戰鬥中造成精準的穿刺。你獲得以下好處:",
+            {
+              "type": "list",
+              "items": [
+                "每回合一次，當你用造成穿刺傷害的攻擊命中一個生物時，你可以重擲其中一個傷害骰，並且你必須使用重投的結果。",
+                "當你用造成穿刺傷害的攻擊命中一個生物並且造成重擊時，你可以在計算重擊傷害時投一個額外的傷害骰。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "毒師",
+          "ENG_name": "Poisoner",
+          "source": "TCE",
+          "page": 80,
+          "toolProficiencies": [
+            {
+              "poisoner's kit": true
+            }
+          ],
+          "entries": [
+            "你可以準備並使用致命的毒藥。你獲得以下好處：",
+            {
+              "type": "list",
+              "items": [
+                "當你投造成毒素傷害的傷害骰時，無視目標的傷害抗性。",
+                "你可以以一個附贈動作為一把武器或一枚彈藥塗毒，而不是一個動作。",
+                "你獲得{@item 制毒工具|phb}的熟練項，如果你還沒有的話。花費一小時使用{@item 制毒工具|phb}進行制作，並且消耗價值 50gp 的材料後，你可以制造一定數量的猛毒，其數量等同於你的熟練加值。當被用於一把武器或一枚彈藥後，猛毒的毒性持續一分鐘或直至你用該武器或彈藥攻擊命中後。當一個生物受到來自塗毒武器或彈藥的傷害後，該生物必須成功通過DC 14的體質豁免，否則將受到{@damage 2d8}毒素傷害並陷入{@condition 中毒}狀態，直至你的下回合結束。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "影界觸碰",
+          "ENG_name": "Shadow Touched",
+          "source": "TCE",
+          "page": 80,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "int",
+                  "wis",
+                  "cha"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "additionalSpells": [
+            {
+              "ability": "inherit",
+              "innate": {
+                "_": {
+                  "daily": {
+                    "1e": [
+                      "invisibility",
+                      {
+                        "choose": "level=1|school=I;N"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "entries": [
+            "暴露在墮影冥界的魔法之下的經歷已經改變了你，使你獲得了以下增益：",
+            {
+              "type": "list",
+              "items": [
+                "你習得{@spell 隱形術}以及一個由你選擇的{@filter 一環法術|spells|level=1|school=I;N}。該一環法術必須是幻術系或死靈系法術。你可以在不消耗法術位的情況下施展這些法術各一次。當你以此法施展某個法術後，你不能再次以此法施展該法術，直至你完成一次長休。你也可以消耗合適的法術位來施展這些法術。這些法術的施法關鍵屬性是你由此專長提升的屬性。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "技藝專家",
+          "ENG_name": "Skill Expert",
+          "source": "TCE",
+          "page": 80,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "str",
+                  "dex",
+                  "con",
+                  "int",
+                  "wis",
+                  "cha"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "skillProficiencies": [
+            {
+              "choose": {
+                "from": [
+                  "athletics",
+                  "acrobatics",
+                  "sleight of hand",
+                  "stealth",
+                  "arcana",
+                  "history",
+                  "investigation",
+                  "nature",
+                  "religion",
+                  "animal handling",
+                  "insight",
+                  "medicine",
+                  "perception",
+                  "survival",
+                  "deception",
+                  "intimidation",
+                  "performance",
+                  "persuasion"
+                ]
+              }
+            }
+          ],
+          "entries": [
+            "你已磨練了自身的特定技藝，並獲得了以下好處：",
+            {
+              "type": "list",
+              "items": [
+                "你選擇並獲得一項技能的熟練項。",
+                "選擇一項你熟練的技能，你獲得該技能的專精，可以將兩倍的熟練加值加到使用該技能進行的屬性檢定上。你選擇的技能必須未受益於其他使熟練加值翻倍的特性，例如專精特性。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "劈砍者",
+          "ENG_name": "Slasher",
+          "source": "TCE",
+          "page": 81,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "str",
+                  "dex"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "entries": [
+            "你已熟知該砍向何處以造成最重的傷害。你獲得以下好處：",
+            {
+              "type": "list",
+              "items": [
+                "每回合一次，當你用造成揮砍傷害的攻擊命中一個生物時，你可以使其速度降低10尺，直到你的下回合開始。",
+                "當你用造成揮砍傷害的攻擊命中一個生物並造成重擊時，你將其重傷，使其所作的攻擊檢定具有劣勢，直至你的下回合開始。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "念動力",
+          "ENG_name": "Telekinetic",
+          "source": "TCE",
+          "page": 81,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "int",
+                  "wis",
+                  "cha"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "additionalSpells": [
+            {
+              "ability": "inherit",
+              "innate": {
+                "1": [
+                  "mage hand"
+                ]
+              }
+            }
+          ],
+          "entries": [
+            "你習得用你的意念移動物體的能力。你獲得以下好處：",
+            {
+              "type": "list",
+              "items": [
+                "你習得{@spell 法師之手}戲法，你施展它無需語言構材或材料構材，並且你可以讓該幽靈手{@condition 隱形}。如果你已經習得該戲法，你施展該戲法時其施法距離提升30尺。該戲法的施法關鍵屬性是你由此專長提升的屬性。",
+                "以一個附贈動作，你可以嘗試以念動力推撞30尺內的一個你可見的生物。當你這樣做時，目標必須成功通過一次力量豁免（DC為8 + 你的熟練加值 + 你由此專長提升的屬性的屬性調整值），否則將被你拉近或推離五尺。目標生物可以自願放棄豁免。"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "心電感應",
+          "ENG_name": "Telepathic",
+          "source": "TCE",
+          "page": 81,
+          "ability": [
+            {
+              "choose": {
+                "from": [
+                  "int",
+                  "wis",
+                  "cha"
+                ],
+                "amount": 1
+              }
+            }
+          ],
+          "additionalSpells": [
+            {
+              "ability": "inherit",
+              "innate": {
+                "_": {
+                  "daily": {
+                    "1": [
+                      "detect thoughts"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "entries": [
+            "你覺醒了用意念與其他生物交流的能力。你獲得以下好處：",
+            {
+              "type": "list",
+              "items": [
+                "你可以和60尺內任何你可見的生物用心靈感應進行交流。你的心電溝通以一種你已知的語言的形式進行，該生物必須懂得該語言才能理解你。你的主動溝通並未給予該生物以心靈感應的形式回覆你的能力。",
+                "你可以施展{@spell 偵測思想}法術，無需法術位和構材。以此法施法後，你在完成一次長休前不能再這樣做。該法術的施法關鍵屬性是你由此專長提升的屬性。如果你擁有二環或更高的法術位，你可以消耗這些法術位施展該法術。"
+              ]
+            }
+          ]
+        }
+  ]
+}
